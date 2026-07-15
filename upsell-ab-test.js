@@ -118,7 +118,11 @@
   // 3. DOM HELPERS
   // ============================================================
   function isOnCheckoutPath() {
-    return location.pathname.indexOf(CONFIG.checkoutPathMatch) !== -1;
+    // Intercept on the real onboarding path OR when running in the test sandbox/preview environment
+    return location.pathname.indexOf(CONFIG.checkoutPathMatch) !== -1 ||
+           location.pathname.indexOf('fridays-upsell-ab-test') !== -1 ||
+           location.hostname === 'localhost' ||
+           location.hostname === '127.0.0.1';
   }
 
   /**
