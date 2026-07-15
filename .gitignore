@@ -1,0 +1,13 @@
+# Ignore proprietary mockups and images
+FRIDAYS Working File/
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.webp
+
+# Ignore IDE files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

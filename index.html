@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Join Fridays — Checkout Sandbox</title>
+  <!-- Modern clean font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-color: #F4F7F8;
+      --text-main: #10262E;
+      --text-muted: #55686D;
+      --border-color: #E3E9EA;
+      --primary-olive: #3D4F27;
+      --primary-green: #0E7C66;
+      --white: #FFFFFF;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Header */
+    header {
+      background: var(--white);
+      border-bottom: 1px solid var(--border-color);
+      padding: 16px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .header-logo {
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--text-main);
+      letter-spacing: -0.03em;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+
+    .lang-toggle {
+      border: 1px solid var(--border-color);
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-weight: 500;
+      cursor: pointer;
+    }
+
+    /* Main Layout */
+    main {
+      flex: 1;
+      max-width: 600px;
+      width: 100%;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    .title-section {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    h1 {
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: var(--text-main);
+    }
+
+    .subtitle {
+      font-size: 15px;
+      color: var(--text-muted);
+    }
+
+    /* Sandbox Info Banner */
+    .sandbox-banner {
+      background: #E8F0FE;
+      border: 1px solid #ADCAFD;
+      color: #1A73E8;
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 24px;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .sandbox-banner strong {
+      color: #185ABC;
+    }
+
+    /* Plan section */
+    .plan-section-title {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .plan-group {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    /* Radix UI simulated Radio Option */
+    label[data-slot="radio-group-item"] {
+      display: flex;
+      align-items: center;
+      background: var(--white);
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 16px;
+      cursor: pointer;
+      position: relative;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    label[data-slot="radio-group-item"]:hover {
+      border-color: #CAD4D6;
+    }
+
+    label[data-slot="radio-group-item"].selected {
+      border-color: var(--primary-olive);
+      box-shadow: 0 0 0 1px var(--primary-olive);
+      background-color: #FAFBFB;
+    }
+
+    /* Hide standard radio, style mock indicator */
+    button[role="radio"] {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      border: 2px solid #C4CDD0;
+      background: var(--white);
+      margin-right: 16px;
+      position: relative;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      padding: 0;
+    }
+
+    label[data-slot="radio-group-item"].selected button[role="radio"] {
+      border-color: var(--primary-olive);
+      background: var(--primary-olive);
+    }
+
+    label[data-slot="radio-group-item"].selected button[role="radio"]::after {
+      content: "";
+      width: 8px;
+      height: 8px;
+      background: var(--white);
+      border-radius: 50%;
+    }
+
+    .plan-info {
+      flex-grow: 1;
+    }
+
+    .plan-name {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 4px;
+    }
+
+    .plan-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    .plan-badge {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      background: #E4F5F0;
+      color: #0E7C66;
+      padding: 2px 8px;
+      border-radius: 4px;
+      margin-top: 6px;
+      text-transform: uppercase;
+    }
+
+    .plan-price-col {
+      text-align: right;
+      flex-shrink: 0;
+      margin-left: 16px;
+    }
+
+    .price-value {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--text-main);
+    }
+
+    .price-period {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .old-price {
+      font-size: 13px;
+      color: #9AA6A9;
+      text-decoration: line-through;
+      margin-right: 4px;
+    }
+
+    /* Bottom Action Bar */
+    .action-bar {
+      background: var(--white);
+      border-top: 1px solid var(--border-color);
+      padding: 16px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      bottom: 0;
+      width: 100%;
+      max-width: 600px;
+      margin: 0 auto;
+      border-radius: 12px 12px 0 0;
+      box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.03);
+    }
+
+    button[data-slot="cancel"] {
+      border: 1px solid var(--border-color);
+      background: var(--white);
+      color: var(--text-main);
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    button[data-slot="cancel"]:hover {
+      background: #FAFBFB;
+    }
+
+    button[data-slot="action"] {
+      background: var(--primary-olive);
+      color: var(--white);
+      border: none;
+      padding: 12px 32px;
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    button[data-slot="action"]:hover {
+      background: #2E3D1C;
+    }
+
+    /* Simulation Logs Overlay */
+    .logs-panel {
+      background: #10262E;
+      color: #7995A0;
+      font-family: monospace;
+      padding: 12px 16px;
+      border-radius: 8px;
+      font-size: 12px;
+      margin-top: 24px;
+      max-height: 150px;
+      overflow-y: auto;
+      border: 1px solid #1A3E4A;
+    }
+
+    .log-entry {
+      margin-bottom: 4px;
+      line-height: 1.4;
+    }
+
+    .log-success { color: #52C41A; }
+    .log-warn { color: #FAAD14; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="header-logo">fridays</div>
+    <div class="header-right">
+      <span>Call us +1 (949) 868 6870</span>
+      <div class="lang-toggle">EN</div>
+    </div>
+  </header>
+
+  <main>
+    <div class="title-section">
+      <h1>Select your Weight Loss Plan</h1>
+      <p class="subtitle">Compounded Tirzepatide (GLP-1/GIP) treatment plans.</p>
+    </div>
+
+    <div class="sandbox-banner">
+      <strong>🧪 A/B Test Sandbox Environment:</strong><br>
+      This is a sandbox page simulating the live Fridays checkout page. The A/B test script is loaded below.
+      Click <strong>Medication Only</strong> or <strong>Monthly Auto-Refill</strong> to test the upsell modals!
+    </div>
+
+    <!-- Group 1: Subscriptions -->
+    <div class="plan-section-title">
+      <span>Maximize results & savings</span>
+    </div>
+    <div class="plan-group">
+      <!-- 3 Month Supply -->
+      <label class="radio-label" data-slot="radio-group-item" id="option-3month">
+        <button role="radio" data-testid="price-option-231" type="button"></button>
+        <div class="plan-info">
+          <div class="plan-name">3-Month Supply</div>
+          <div class="plan-desc">Skip two separate refills. Lowest price per month.</div>
+          <div class="plan-badge">Save $471</div>
+        </div>
+        <div class="plan-price-col">
+          <div class="price-value"><span class="old-price">$389</span>$232</div>
+          <div class="price-period">/ mo</div>
+        </div>
+      </label>
+
+      <!-- 6 Month Supply -->
+      <label class="radio-label" data-slot="radio-group-item" id="option-6month">
+        <button role="radio" data-testid="price-option-232" type="button"></button>
+        <div class="plan-info">
+          <div class="plan-name">6-Month Supply</div>
+          <div class="plan-desc">Lock in member pricing for 6 months.</div>
+        </div>
+        <div class="plan-price-col">
+          <div class="price-value">$225</div>
+          <div class="price-period">/ mo</div>
+        </div>
+      </label>
+    </div>
+
+    <!-- Group 2: Monthly Options -->
+    <div class="plan-section-title">
+      <span>Flexible monthly plans</span>
+    </div>
+    <div class="plan-group">
+      <!-- Monthly Auto-Refill -->
+      <label class="radio-label selected" data-slot="radio-group-item" id="option-monthly">
+        <button role="radio" data-testid="price-option-3" type="button"></button>
+        <div class="plan-info">
+          <div class="plan-name">Monthly Auto-Refill</div>
+          <div class="plan-desc">Flexible monthly deliveries. Cancel anytime.</div>
+          <div class="plan-badge">Save $130</div>
+        </div>
+        <div class="plan-price-col">
+          <div class="price-value"><span class="old-price">$389</span>$259</div>
+          <div class="price-period">/ mo</div>
+        </div>
+      </label>
+    </div>
+
+    <!-- Group 3: One-time -->
+    <div class="plan-section-title">
+      <span>Pay Full Retail (No Refill)</span>
+    </div>
+    <div class="plan-group">
+      <!-- Medication Only -->
+      <label class="radio-label" data-slot="radio-group-item" id="option-medication">
+        <button role="radio" data-testid="price-option-211" type="button"></button>
+        <div class="plan-info">
+          <div class="plan-name">Medication Only</div>
+          <div class="plan-desc">Single month only. One-time payment. Excludes coaching.</div>
+        </div>
+        <div class="plan-price-col">
+          <div class="price-value">$389</div>
+          <div class="price-period">one-time</div>
+        </div>
+      </label>
+    </div>
+
+    <div class="plan-section-title">Simulation Logs</div>
+    <div class="logs-panel" id="log-container">
+      <div class="log-entry">[System] Sandbox initialized. Click plan options to begin.</div>
+    </div>
+  </main>
+
+  <div class="action-bar">
+    <button data-slot="cancel" type="button">Back</button>
+    <button data-slot="action" type="button">Continue</button>
+  </div>
+
+  <!-- Simulated navigation logs -->
+  <script>
+    // Console proxy to display messages in the logs panel
+    const logContainer = document.getElementById('log-container');
+    function addLog(msg, type = 'info') {
+      const div = document.createElement('div');
+      div.className = 'log-entry' + (type === 'success' ? ' log-success' : type === 'warn' ? ' log-warn' : '');
+      div.textContent = msg;
+      logContainer.appendChild(div);
+      logContainer.scrollTop = logContainer.scrollHeight;
+    }
+
+    // Capture browser console logs
+    const originalLog = console.log;
+    console.log = function(...args) {
+      originalLog.apply(console, args);
+      const text = args.join(' ');
+      if (text.includes('[UpsellTest]')) {
+        addLog(text, text.includes('selected') || text.includes('Initialized') ? 'success' : 'info');
+      }
+    };
+    const originalWarn = console.warn;
+    console.warn = function(...args) {
+      originalWarn.apply(console, args);
+      addLog('[Warning] ' + args.join(' '), 'warn');
+    };
+
+    // Radix UI simulation: clicking option card selects it
+    const labels = document.querySelectorAll('label[data-slot="radio-group-item"]');
+    labels.forEach(label => {
+      // Avoid intercepting the click to simulate the SPA selection
+      label.addEventListener('click', function(e) {
+        // Only run if the click wasn't intercepted and prevented
+        if (e.defaultPrevented) return;
+        
+        labels.forEach(l => l.classList.remove('selected'));
+        label.classList.add('selected');
+        
+        const planName = label.querySelector('.plan-name').textContent;
+        console.log('[SPA State] Selected plan updated in state: ' + planName);
+      });
+    });
+
+    // Simulate clicking Continue action button
+    document.querySelector('button[data-slot="action"]').addEventListener('click', function() {
+      const selected = document.querySelector('label[data-slot="radio-group-item"].selected .plan-name').textContent;
+      addLog('🚀 [SPA Navigation] checkout -> payment (Selected Plan: ' + selected + ')', 'success');
+      alert('Success! Checkout complete with: ' + selected);
+    });
+  </script>
+
+  <!-- Embed A/B Test script directly -->
+  <script src="upsell-ab-test.js"></script>
+</body>
+</html>
