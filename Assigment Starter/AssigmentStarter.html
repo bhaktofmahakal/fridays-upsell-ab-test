@@ -19,43 +19,20 @@
 
 
     <style>
-        /* ══════════════════════════════════════════════════════════════
-
-       THE OPERATOR — designv2.md
-
-    ══════════════════════════════════════════════════════════════ */
-
         :root {
-
-            /* Surfaces */
-
             --background: #F5F4F0;
 
             --surface-lowest: #FFFFFF;
-
             --surface-low: #F1F0EC;
-
             --surface-container: #EBEAE6;
-
             --surface-high: #E4E3DF;
-
             --surface-highest: #DDDCD8;
-
             --surface-variant: #DDDCD8;
 
-
-            /* Text */
-
             --on-surface: #1A1E27;
-
             --on-surface-variant: #4A5168;
-
             --outline: #7A7F8E;
-
             --outline-variant: #C2C5CC;
-
-
-            /* Brand */
 
             --primary: #E8800A;
 
@@ -71,31 +48,19 @@
 
             --inverse-on-surface: #EAECF0;
 
-
-            /* Secondary (Brand Navy) */
-
             --secondary: #1A1E27;
 
             --secondary-container: #272D3C;
 
             --on-secondary-container: #EAECF0;
 
-
-            /* Semantic */
-
             --error: #C0392B;
-
-
-            /* Navy shadows — base #1A1E27 */
 
             --shadow-sm: 0 1px 2px rgba(26, 30, 39, .08), 0 6px 18px rgba(26, 30, 39, .06);
 
             --shadow-md: 0 2px 6px rgba(26, 30, 39, .10), 0 14px 34px rgba(26, 30, 39, .12);
 
             --shadow-lg: 0 8px 16px rgba(26, 30, 39, .10), 0 24px 48px rgba(26, 30, 39, .18);
-
-
-            /* Spacing — 4px baseline */
 
             --section-pad: 56px;
 
@@ -111,9 +76,6 @@
 
             --gutter: 20px;
 
-
-            /* Radius */
-
             --r-base: 6px;
 
             --r-md: 8px;
@@ -126,8 +88,6 @@
 
         }
 
-
-        /* ── RESET ───────────────────────────────────────────────── */
 
         *,
         *::before,
@@ -150,9 +110,6 @@
 
         }
 
-
-        /* ── SHARED UTILITIES ────────────────────────────────────── */
-
         .label-caps {
 
             font-family: 'DM Sans', sans-serif;
@@ -168,9 +125,6 @@
             text-transform: uppercase;
 
         }
-
-
-        /* VSL Card — 4px orange top-border, navy shadow, xl radius */
 
         .vsl-card {
 
@@ -189,9 +143,6 @@
             overflow: hidden;
 
         }
-
-
-        /* Play button pulse ring */
 
         @keyframes play-pulse {
 
@@ -239,13 +190,6 @@
 
 
 
-        /* ══════════════════════════════════════════════════════════════
-
-       SECTION 1 — CENTERED AUTHORITY
-
-    ══════════════════════════════════════════════════════════════ */
-
-
         .s1 {
             background: #10161D;
             color: #FFFFFF;
@@ -254,7 +198,6 @@
             overflow: hidden;
         }
 
-        /* Flowing Silk Wave Shader */
         .s1-shader {
             position: absolute;
             top: 35%;
@@ -286,7 +229,6 @@
             z-index: 2;
         }
 
-        /* headline — Oswald display */
         .s1-headline {
             font-family: 'Oswald', sans-serif;
             font-size: clamp(28px, 5.5vw, 72px);
@@ -301,7 +243,6 @@
             color: #E8800A;
         }
 
-        /* subhead */
         .s1-sub {
             font-size: clamp(16px, 2.5vw, 19px);
             font-weight: 400;
@@ -311,7 +252,6 @@
             margin-bottom: 32px;
         }
 
-        /* video */
         .s1-vsl {
             width: 100%;
             max-width: 800px;
@@ -375,7 +315,6 @@
             color: #FFFFFF !important;
         }
 
-        /* play btn */
         .s1-play-btn {
             width: 72px;
             height: 72px;
@@ -401,7 +340,6 @@
             margin-left: 4px;
         }
 
-        /* trust strip */
         .s1-trust {
             display: flex;
             align-items: center;
@@ -436,7 +374,6 @@
             flex-shrink: 0;
         }
 
-        /* floating KPI chip */
         .s1-kpi {
             position: absolute;
             bottom: 32px;
@@ -526,7 +463,6 @@
             font-weight: 500;
         }
 
-        /* s1 CTA button block */
         .s1-cta-wrap {
             display: flex;
             flex-direction: column;
@@ -595,7 +531,6 @@
             transform: translateX(4px);
         }
 
-        /* See it in Action neon pointer */
         .s1-action-pointer {
             position: absolute;
             top: -45px;
@@ -628,13 +563,6 @@
             }
         }
 
-
-
-        /* ══════════════════════════════════════════════════════════════
-
-       SECTION 2 — PROOF STAT
-
-    ══════════════════════════════════════════════════════════════ */
 
 
         .s2 {
@@ -695,7 +623,6 @@
             color: #1A1E27;
         }
 
-        /* brand logos grid */
         .s2-logos-grid {
             display: grid;
             grid-template-columns: repeat(6, 1fr);
@@ -834,12 +761,6 @@
 
 
 
-        /* ══════════════════════════════════════════════════════════════
-
-       SECTION 3 — TIMELINE NODES
-
-    ══════════════════════════════════════════════════════════════ */
-
         .s3-card-top {
             display: flex;
             align-items: center;
@@ -893,13 +814,6 @@
             display: block;
         }
 
-        /* ══════════════════════════════════════════════════════════════
-
-       SECTION 4 — QUOTE-FORWARD
-
-    ══════════════════════════════════════════════════════════════ */
-
-
         .s4 {
             background: var(--background);
             padding: var(--section-pad) var(--gutter);
@@ -931,7 +845,6 @@
             }
         }
 
-        /* Founder Left Column */
         .s4-founder-col {
             display: flex;
             flex-direction: column;
@@ -974,7 +887,6 @@
             background: rgba(255, 255, 255, 0.2);
         }
 
-        /* Text Right Column */
         .s4-text-col {
             display: flex;
             flex-direction: column;
@@ -1094,13 +1006,6 @@
 
 
 
-        /* ══════════════════════════════════════════════════════════════
-
-       SECTION 5 — 2×2 DATA CARDS
-
-    ══════════════════════════════════════════════════════════════ */
-
-
         .s5 {
             background: var(--surface-lowest);
             padding: var(--section-pad) var(--gutter);
@@ -1144,7 +1049,6 @@
             color: var(--on-surface-variant);
         }
 
-        /* Slider elements */
         .s5-slider-viewport {
             overflow: hidden;
             width: 100%;
@@ -1164,7 +1068,6 @@
             }
         }
 
-        /* Chat card styles */
         .s5-chat-card {
             border-radius: var(--r-xl);
             padding: 40px 32px 32px;
@@ -1229,7 +1132,6 @@
             color: rgba(16, 22, 29, 0.8);
         }
 
-        /* Client message bubble */
         .client-bubble-wrap {
             align-self: flex-start;
             max-width: 90%;
@@ -1260,7 +1162,6 @@
             clip-path: polygon(100% 0, 0 0, 100% 100%);
         }
 
-        /* Team message bubble */
         .team-bubble-wrap {
             align-self: flex-end;
             max-width: 90%;
@@ -1292,7 +1193,6 @@
             clip-path: polygon(0 0, 0 100%, 100% 100%);
         }
 
-        /* Client Footer Row */
         .s5-chat-footer {
             display: flex;
             align-items: center;
@@ -1326,7 +1226,6 @@
             color: #10161D;
         }
 
-        /* Slider Controls */
         .s5-controls-row {
             display: flex;
             align-items: center;
@@ -1394,8 +1293,6 @@
 
 
 
-        /* ── SECTION 6 · Performance Guarantee ──────────────────── */
-
         .s6-section {
             position: relative;
             background: #1C222E;
@@ -1459,7 +1356,6 @@
             text-transform: uppercase;
         }
 
-        /* CTA Button under label */
         .s6-cta-button {
             display: inline-flex;
             align-items: center;
@@ -1522,8 +1418,6 @@
 
 
 
-
-        /* ── SECTION 7 · Objection Handling (Variant F · FAQ Accordion) ─ */
 
         .s7-section {
 
@@ -1774,8 +1668,6 @@
 
 
 
-        /* ── SECTION 8 · Guarantee Restatement + Scarcity (Variant A · Dark Metrics) ─ */
-
         .s8-section {
 
             background: var(--background);
@@ -1935,8 +1827,6 @@
         }
 
 
-
-        /* ── SECTION 9 · Final CTA ───────────────────────────────── */
 
         .s9-section {
 
@@ -2292,8 +2182,6 @@
 
 
 
-        /* ── HEADER ──────────────────────────────────────────────── */
-
         .hdr {
             position: sticky;
             top: 0;
@@ -2372,8 +2260,6 @@
         }
 
 
-
-        /* ── FOOTER ──────────────────────────────────────────────── */
 
         .ftr {
 
@@ -2511,17 +2397,9 @@
 
 
 
-        /* ══════════════════════════════════════════════════════════════
-
-       POLISH PASS — focus, motion, responsive
-
-    ══════════════════════════════════════════════════════════════ */
-
-
         html {
             scroll-behavior: smooth;
         }
-
 
         /* Keyboard focus ring — never removed, only restyled */
 
@@ -2556,8 +2434,6 @@
         }
 
 
-        /* Only stop the decorative pulse ring for reduced-motion users */
-
         @media (prefers-reduced-motion: reduce) {
 
             .play-pulse {
@@ -2571,19 +2447,6 @@
         }
 
 
-        /* ════════════════════════════════════════════════════════════
-
-       MOBILE-FIRST RESPONSIVE
-
-       Base = 375px  ·  min-width: 768px tablet  ·  min-width: 1080px desktop
-
-    ════════════════════════════════════════════════════════════ */
-
-
-        /* ── Mobile base (≤ 767px) ───────────────────────────────── */
-
-
-        /* Sections with hard-coded 40px horizontal padding → fluid gutter */
 
         .hdr {
             padding: 0 var(--gutter);
@@ -2609,15 +2472,9 @@
             padding: 40px var(--gutter) 32px;
         }
 
-
-        /* Header nav */
-
         .hdr-link {
             display: none;
         }
-
-
-        /* S1 */
 
         .s1-vsl {
             padding-bottom: 0;
@@ -2640,9 +2497,6 @@
             padding: 16px 32px;
         }
 
-
-        /* S3 — single column stacked */
-
         .s3-cards {
             grid-template-columns: 1fr;
             border-radius: var(--r-lg);
@@ -2658,15 +2512,9 @@
             border-bottom: none;
         }
 
-
-        /* S4 */
-
         .s4-p {
             font-size: 16px;
         }
-
-
-        /* S5 — fully stacked */
 
         .s5-intro {
             margin-bottom: 32px;
@@ -2688,9 +2536,6 @@
         .s5-trio {
             grid-template-columns: 1fr;
         }
-
-
-        /* S6 — inline numeral beside label, content stacked below */
 
         .s6-inner {
             grid-template-columns: 1fr;
@@ -2725,9 +2570,6 @@
             margin-top: 0;
         }
 
-
-        /* S7 — tighter accordion */
-
         .s7-trigger {
             padding: 22px 0;
             gap: 12px;
@@ -2736,9 +2578,6 @@
         .s7-panel-inner {
             padding: 0 8px 24px 40px;
         }
-
-
-        /* S8 — single column */
 
         .s8-metrics {
             grid-template-columns: 1fr;
@@ -2749,9 +2588,6 @@
             padding: 24px 20px;
         }
 
-
-        /* S9 */
-
         .s9-btn {
             padding: 18px 32px;
             font-size: 16px;
@@ -2761,9 +2597,6 @@
         .s9-panel-inner {
             padding: 28px 24px;
         }
-
-
-        /* Footer */
 
         .ftr-top {
             flex-direction: column;
@@ -2776,9 +2609,6 @@
         }
 
 
-
-        /* ── 768px+: tablet ──────────────────────────────────────── */
-
         @media (min-width: 768px) {
 
             :root {
@@ -2786,15 +2616,9 @@
                 --gutter: 24px;
             }
 
-
-            /* Header */
-
             .hdr-link {
                 display: inline;
             }
-
-
-            /* S1 */
 
             .s1-kpi {
                 display: block;
@@ -2821,22 +2645,13 @@
                 padding: 18px 40px;
             }
 
-
-            /* S3 — still 1-col at tablet, roomier padding */
-
             .s3-card {
                 padding: 32px 28px;
             }
 
-
-            /* S4 */
-
             .s4-p {
                 font-size: 18px;
             }
-
-
-            /* S5 — featured 2-col, trio 2-col */
 
             .s5-intro {
                 margin-bottom: 48px;
@@ -2859,9 +2674,6 @@
                 grid-template-columns: 1fr 1fr;
             }
 
-
-            /* S6 — larger numeral at tablet */
-
             .s6-numeral-col {
                 flex-direction: row;
                 align-items: baseline;
@@ -2878,9 +2690,6 @@
                 font-size: 26px;
             }
 
-
-            /* S8 — 3-col */
-
             .s8-metrics {
                 grid-template-columns: 1fr 1fr 1fr;
                 gap: 24px;
@@ -2889,9 +2698,6 @@
             .s8-metric {
                 padding: 28px 20px;
             }
-
-
-            /* S9 */
 
             .s9-btn {
                 width: auto;
@@ -2902,9 +2708,6 @@
             .s9-panel-inner {
                 padding: 36px 40px;
             }
-
-
-            /* Footer */
 
             .ftr-top {
                 flex-direction: row;
@@ -2917,9 +2720,6 @@
 
         }
 
-
-
-        /* ── 840px+: large tablet ────────────────────────────────── */
 
         @media (min-width: 840px) {
             .s3-cards {
@@ -2938,9 +2738,6 @@
             }
         }
 
-
-        /* ── 1080px+: desktop ────────────────────────────────────── */
-
         @media (min-width: 1080px) {
 
             :root {
@@ -2951,9 +2748,6 @@
             .s3-card {
                 padding: 36px 32px;
             }
-
-
-            /* S5 — featured 50/50, trio 3-col */
 
             .s5-feat-img {
                 aspect-ratio: 4/3;
@@ -2966,9 +2760,6 @@
             .s5-trio {
                 grid-template-columns: 1fr 1fr 1fr;
             }
-
-
-            /* S6 — full side-by-side with giant numeral */
 
             .s6-inner {
 
@@ -3014,8 +2805,6 @@
 <body>
 
 
-    <!-- ══ HEADER ══ -->
-
     <header class="hdr" id="site-header">
         <div class="hdr-inner">
             <a href="#" class="hdr-wordmark">
@@ -3039,14 +2828,6 @@
         </div>
     </header>
 
-
-    <!-- ══════════════════════════════════════════════════════════
-
-       SECTION 1 — CENTERED AUTHORITY
-
-       Source: section-01-layout-explorations.html · Variant A
-
-  ══════════════════════════════════════════════════════════ -->
 
     <section class="s1">
         <div class="s1-shader">
@@ -3077,7 +2858,6 @@
                 to see what those problems are, then let us show you which ones are in yours.
             </p>
             <div class="s1-vsl">
-                <!-- Neon See It In Action Pointer -->
                 <div class="s1-action-pointer">
                     <span>See It In Action</span>
                     <svg viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -3091,7 +2871,6 @@
                 <div class="vsl-card">
                     <div class="s1-thumb">
                         <div class="s1-thumb-inner-text">IN 90 DAYS</div>
-                        <!-- Graph visual in background -->
                         <svg class="s1-thumb-graph" viewBox="0 0 800 450" fill="none" xmlns="http://www.w3.org/2000/svg"
                             style="position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none;">
                             <path d="M-50 380 L180 280 L350 330 L680 100" stroke="#FFC56D" stroke-width="12"
@@ -3207,17 +2986,8 @@
 
 
 
-    <!-- ══════════════════════════════════════════════════════════
-
-       SECTION 2 — PROOF STAT
-
-       Source: section-02-layout-explorations-v2.html · Variant A
-
-  ══════════════════════════════════════════════════════════ -->
-
     <section class="s2">
         <div class="s2-inner">
-            <!-- Amazon Logo at the top -->
             <div class="s2-amazon-logo" style="display: flex; justify-content: center; margin-bottom: 24px;">
                 <svg viewBox="0 0 603 182" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="height: 28px; width: auto; display: block; color: #000000;">
                     <path d="m 374.00642,142.18404 c -34.99948,25.79739 -85.72909,39.56123 -129.40634,39.56123 -61.24255,0 -116.37656,-22.65135 -158.08757,-60.32496 -3.2771,-2.96252 -0.34083,-6.9999 3.59171,-4.69283 45.01431,26.19064 100.67269,41.94697 158.16623,41.94697 38.774689,0 81.4295,-8.02237 120.6499,-24.67006 5.92501,-2.51683 10.87999,3.88009 5.08607,8.17965" fill="#FF9900" />
@@ -3236,7 +3006,6 @@
             <p class="s2-trail">in the first <strong>90 days.</strong></p>
             <p class="s2-support">That is what the audit finds. Before you spend a dollar.</p>
 
-            <!-- Brand Logos Grid -->
             <div class="s2-logos-grid">
                 <div class="s2-logo-item">
                     <span style="font-family:'Georgia', serif; font-weight: 900; font-style: italic; font-size: 23px; letter-spacing: -0.05em; text-transform: uppercase;">FORM</span>
@@ -3327,14 +3096,6 @@
 
 
 
-    <!-- ══════════════════════════════════════════════════════════
-
-       SECTION 3 — TIMELINE NODES
-
-       Source: section-03-layout-explorations.html · Variant F
-
-  ══════════════════════════════════════════════════════════ -->
-
     <section class="s3">
 
         <div class="s3-inner">
@@ -3345,7 +3106,6 @@
 
             <div class="s3-cards">
 
-                <!-- Card 1 -->
                 <div class="s3-card">
                     <div class="s3-img">
                         <svg viewBox="0 0 240 160" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -3412,7 +3172,6 @@
                         The longer it goes unfixed, the worse it gets.</p>
                 </div>
 
-                <!-- Card 2 -->
                 <div class="s3-card">
                     <div class="s3-img">
                         <svg viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -3455,7 +3214,6 @@
                         together.</p>
                 </div>
 
-                <!-- Card 3 -->
                 <div class="s3-card">
                     <div class="s3-img">
                         <svg viewBox="0 0 200 180" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -3502,7 +3260,6 @@
 
             </div>
 
-            <!-- Centered Button below cards -->
             <div style="display: flex; justify-content: center; margin-top: 40px;">
                 <a href="#book-audit" class="s1-cta" style="margin: 0;">
                     Book Your Free Amazon Audit
@@ -3519,17 +3276,8 @@
 
 
 
-    <!-- ══════════════════════════════════════════════════════════
-
-       SECTION 4 — QUOTE-FORWARD
-
-       Source: section-04-layout-explorations-v2.html · Variant B
-
-  ══════════════════════════════════════════════════════════ -->
-
     <section class="s4">
         <div class="s4-inner">
-            <!-- Left Column: Portrait & Badges -->
             <div class="s4-founder-col">
                 <div class="s4-founder-photo">
                     <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?fit=crop&w=400&h=500&q=80"
@@ -3539,7 +3287,6 @@
                 <div class="s4-badge">500+ Millions Generated</div>
             </div>
 
-            <!-- Right Column: Quote Text -->
             <div class="s4-text-col">
                 <h2 class="s4-pullquote">
                     I Built AMZexpand To Give Other Sellers The System I Had To Figure Out <span>The Hard Way.</span>
@@ -3561,14 +3308,6 @@
 
 
 
-    <!-- ══════════════════════════════════════════════════════════
-
-       SECTION 5 — 2×2 DATA CARDS
-
-       Source: section-05-layout-explorations.html · Variant A
-
-  ══════════════════════════════════════════════════════════ -->
-
     <section class="s5">
         <div class="s5-inner">
             <div class="s5-intro">
@@ -3577,10 +3316,8 @@
                     what their account is doing every week.</p>
             </div>
 
-            <!-- Slider Viewport -->
             <div class="s5-slider-viewport">
                 <div class="s5-slider-track" id="s5-track">
-                    <!-- Chat Card 1 (Jasmine L.) -->
                     <div class="s5-chat-card slate-theme">
                         <div class="s5-chat-history">
                             <div class="client-bubble-wrap">
@@ -3606,7 +3343,6 @@
                         </div>
                     </div>
 
-                    <!-- Chat Card 2 (Marcus T.) -->
                     <div class="s5-chat-card cream-theme">
                         <div class="s5-chat-history">
                             <div class="client-bubble-wrap">
@@ -3632,7 +3368,6 @@
                         </div>
                     </div>
 
-                    <!-- Chat Card 3 (Reena P.) -->
                     <div class="s5-chat-card slate-theme">
                         <div class="s5-chat-history">
                             <div class="client-bubble-wrap">
@@ -3658,7 +3393,6 @@
                         </div>
                     </div>
 
-                    <!-- Chat Card 4 (Daniel K.) -->
                     <div class="s5-chat-card cream-theme">
                         <div class="s5-chat-history">
                             <div class="client-bubble-wrap">
@@ -3685,7 +3419,6 @@
                 </div>
             </div>
 
-            <!-- Controls Row -->
             <div class="s5-controls-row">
                 <div class="s5-dots" id="s5-dots">
                     <span class="s5-dot active" data-index="0"></span>
@@ -3709,12 +3442,6 @@
     </section>
 
 
-
-    <!-- ══════════════════════════════════════════════════════
-
-       SECTION 6 · Performance Guarantee (Variant A · Dark Statement)
-
-       ══════════════════════════════════════════════════════ -->
 
     <section class="s6-section">
         <!-- Concentric waves bg pattern matching Figma -->
@@ -3746,12 +3473,6 @@
     </section>
 
 
-
-    <!-- ══════════════════════════════════════════════════════
-
-       SECTION 7 · Objection Handling (Variant F · FAQ Accordion)
-
-       ══════════════════════════════════════════════════════ -->
 
     <section class="s7-section">
 
@@ -3903,7 +3624,6 @@
 
             </div>
 
-            <!-- Centered Button below accordion -->
             <div style="display: flex; justify-content: center; margin-top: 48px;">
                 <a href="#book-audit" class="s1-cta" style="margin: 0;">
                     Book Your Free Amazon Audit
@@ -3918,12 +3638,6 @@
     </section>
 
 
-
-    <!-- ══════════════════════════════════════════════════════
-
-       SECTION 8 · Guarantee Restatement + Scarcity (Variant A · Dark Metrics)
-
-       ══════════════════════════════════════════════════════ -->
 
     <section class="s8-section">
 
@@ -3989,7 +3703,6 @@
 
             </div>
 
-            <!-- Centered Button below copy -->
             <div style="display: flex; justify-content: center; margin-top: 48px;">
                 <a href="#book-audit" class="s1-cta" style="margin: 0;">
                     Book Your Free Amazon Audit
@@ -4004,12 +3717,6 @@
     </section>
 
 
-
-    <!-- ══════════════════════════════════════════════════════
-
-       SECTION 9 · Final CTA (Variant A · Dark Centered)
-
-       ══════════════════════════════════════════════════════ -->
 
     <section class="s9-section">
 
@@ -4113,8 +3820,6 @@
     </section>
 
 
-    <!-- ══ FOOTER ══ -->
-
     <footer class="ftr">
 
         <div class="ftr-inner">
@@ -4167,8 +3872,6 @@
 
     <script>
 
-        /* ── Play button keyboard support ── */
-
         (function () {
 
             var playBtn = document.querySelector('.s1-play-btn');
@@ -4190,8 +3893,6 @@
         })();
 
 
-        /* ── Header scroll ── */
-
         (function () {
 
             var header = document.getElementById('site-header');
@@ -4212,8 +3913,6 @@
 
         })();
 
-
-        /* ── Testimonials slider ── */
 
         (function () {
 
@@ -4267,7 +3966,6 @@
                 var offset = -currentIndex * (cardWidth + params.gap);
                 track.style.transform = 'translateX(' + offset + 'px)';
 
-                // Re-build/update dots
                 dotsContainer.innerHTML = '';
                 for (var i = 0; i <= params.maxIndex; i++) {
                     var dot = document.createElement('span');
@@ -4311,8 +4009,6 @@
 
         })();
 
-
-        /* ── Section 7 accordion ── */
 
         (function () {
 
@@ -4360,8 +4056,6 @@
 
         })();
 
-
-        /* ── Section 2 ticker ── */
 
         (function () {
 
@@ -4433,8 +4127,6 @@
 
         })();
 
-
-        /* ── Section 9 expandable ── */
 
         (function () {
 

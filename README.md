@@ -3,8 +3,13 @@
 This repository contains the implementation of a subscription upsell A/B test variation for **Join Fridays**.
 
 ## 🔗 Live Links
+
+### Task 1 — Join Fridays Upsell A/B Test
 - **Live Sandbox Preview:** [https://bhaktofmahakal.github.io/fridays-upsell-ab-test/](https://bhaktofmahakal.github.io/fridays-upsell-ab-test/)
 - **GitHub Repository:** [https://github.com/bhaktofmahakal/fridays-upsell-ab-test](https://github.com/bhaktofmahakal/fridays-upsell-ab-test)
+
+### Task 2 — AMZexpand Landing Page
+- **Live Deployment:** [https://a-b-test-lemon.vercel.app/](https://a-b-test-lemon.vercel.app/)
 
 ---
 
