@@ -1,0 +1,4446 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AMZexpand — V2</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;600;700&family=Oswald:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+
+    <style>
+        /* ══════════════════════════════════════════════════════════════
+
+       THE OPERATOR — designv2.md
+
+    ══════════════════════════════════════════════════════════════ */
+
+        :root {
+
+            /* Surfaces */
+
+            --background: #F5F4F0;
+
+            --surface-lowest: #FFFFFF;
+
+            --surface-low: #F1F0EC;
+
+            --surface-container: #EBEAE6;
+
+            --surface-high: #E4E3DF;
+
+            --surface-highest: #DDDCD8;
+
+            --surface-variant: #DDDCD8;
+
+
+            /* Text */
+
+            --on-surface: #1A1E27;
+
+            --on-surface-variant: #4A5168;
+
+            --outline: #7A7F8E;
+
+            --outline-variant: #C2C5CC;
+
+
+            /* Brand */
+
+            --primary: #E8800A;
+
+            --on-primary: #FFFFFF;
+
+            --primary-container: #C26100;
+
+            --on-primary-container: #FDE8C8;
+
+            --inverse-primary: #FBCA81;
+
+            --inverse-surface: #272D3C;
+
+            --inverse-on-surface: #EAECF0;
+
+
+            /* Secondary (Brand Navy) */
+
+            --secondary: #1A1E27;
+
+            --secondary-container: #272D3C;
+
+            --on-secondary-container: #EAECF0;
+
+
+            /* Semantic */
+
+            --error: #C0392B;
+
+
+            /* Navy shadows — base #1A1E27 */
+
+            --shadow-sm: 0 1px 2px rgba(26, 30, 39, .08), 0 6px 18px rgba(26, 30, 39, .06);
+
+            --shadow-md: 0 2px 6px rgba(26, 30, 39, .10), 0 14px 34px rgba(26, 30, 39, .12);
+
+            --shadow-lg: 0 8px 16px rgba(26, 30, 39, .10), 0 24px 48px rgba(26, 30, 39, .18);
+
+
+            /* Spacing — 4px baseline */
+
+            --section-pad: 72px;
+
+            --vsl-width: 800px;
+
+            --max-width: 1280px;
+
+            --stack-sm: 8px;
+
+            --stack-md: 24px;
+
+            --stack-lg: 48px;
+
+            --gutter: 20px;
+
+
+            /* Radius */
+
+            --r-base: 6px;
+
+            --r-md: 8px;
+
+            --r-lg: 12px;
+
+            --r-xl: 16px;
+
+            --r-full: 9999px;
+
+        }
+
+
+        /* ── RESET ───────────────────────────────────────────────── */
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+
+        body {
+
+            font-family: 'DM Sans', system-ui, sans-serif;
+
+            background: var(--background);
+
+            color: var(--on-surface);
+
+            -webkit-font-smoothing: antialiased;
+
+        }
+
+
+        /* ── SHARED UTILITIES ────────────────────────────────────── */
+
+        .label-caps {
+
+            font-family: 'DM Sans', sans-serif;
+
+            font-size: 12px;
+
+            font-weight: 600;
+
+            line-height: 1;
+
+            letter-spacing: 0.1em;
+
+            text-transform: uppercase;
+
+        }
+
+
+        /* VSL Card — 4px orange top-border, navy shadow, xl radius */
+
+        .vsl-card {
+
+            border-radius: var(--r-xl);
+
+            border-top: 4px solid var(--primary);
+
+            border-left: 1px solid var(--outline-variant);
+
+            border-right: 1px solid var(--outline-variant);
+
+            border-bottom: 1px solid var(--outline-variant);
+
+            box-shadow: var(--shadow-lg);
+
+            overflow: hidden;
+
+        }
+
+
+        /* Play button pulse ring */
+
+        @keyframes play-pulse {
+
+            0% {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: .4;
+            }
+
+            100% {
+                transform: translate(-50%, -50%) scale(1.65);
+                opacity: 0;
+            }
+
+        }
+
+        .play-anchor {
+
+            position: absolute;
+
+            top: 50%;
+
+            left: 50%;
+
+            transform: translate(-50%, -50%);
+
+            z-index: 10;
+
+        }
+
+        .play-pulse {
+
+            position: absolute;
+
+            top: 50%;
+
+            left: 50%;
+
+            border-radius: 50%;
+
+            border: 1.5px solid rgba(255, 255, 255, .28);
+
+            animation: play-pulse 2.2s ease-out infinite;
+
+        }
+
+
+
+        /* ══════════════════════════════════════════════════════════════
+
+       SECTION 1 — CENTERED AUTHORITY
+
+    ══════════════════════════════════════════════════════════════ */
+
+
+        .s1 {
+            background: #10161D;
+            color: #FFFFFF;
+            padding: calc(var(--section-pad) - 24px) var(--gutter) var(--section-pad);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Flowing Silk Wave Shader */
+        .s1-shader {
+            position: absolute;
+            top: 35%;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 1;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .s1-shader svg {
+            position: absolute;
+            width: 140%;
+            height: 100%;
+            top: 0;
+            left: -20%;
+            opacity: 0.13;
+        }
+
+        .s1-inner {
+            max-width: var(--vsl-width);
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* headline — Oswald display */
+        .s1-headline {
+            font-family: 'Oswald', sans-serif;
+            font-size: clamp(36px, 5.5vw, 72px);
+            font-weight: 500;
+            line-height: 1.15;
+            letter-spacing: -0.015em;
+            color: #FFFFFF;
+            margin-bottom: var(--stack-md);
+        }
+
+        .s1-headline .money {
+            color: #E8800A;
+        }
+
+        /* subhead */
+        .s1-sub {
+            font-size: clamp(16px, 2.5vw, 19px);
+            font-weight: 400;
+            line-height: 1.6;
+            color: #A2AABF;
+            max-width: 680px;
+            margin-bottom: 32px;
+        }
+
+        /* video */
+        .s1-vsl {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto var(--stack-lg);
+            position: relative;
+        }
+
+        .s1-thumb {
+            width: 100%;
+            aspect-ratio: 16/9;
+            background: linear-gradient(135deg, #F9B035 0%, #E8800A 100%);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            border-radius: var(--r-lg);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .s1-thumb-inner-text {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(48px, 10vw, 96px);
+            color: #FFFFFF;
+            letter-spacing: 0.02em;
+            user-select: none;
+            z-index: 1;
+        }
+
+        .s1-thumb-footer {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 48px 24px 20px;
+            background: linear-gradient(transparent, rgba(0, 0, 0, .6));
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            z-index: 2;
+        }
+
+        .s1-thumb-footer span {
+            font-size: 12px;
+            font-weight: 600;
+            color: rgba(255, 255, 255, .8);
+            letter-spacing: .06em;
+            text-transform: uppercase;
+        }
+
+        .s1-duration {
+            background: rgba(0, 0, 0, .6);
+            border-radius: var(--r-base);
+            padding: 3px 8px;
+            font-size: 11px;
+            font-weight: 700;
+            color: #FFFFFF !important;
+        }
+
+        /* play btn */
+        .s1-play-btn {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            background: #FFFFFF;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, .3);
+            transition: transform .18s, background-color .18s;
+            position: relative;
+        }
+
+        .s1-play-btn:hover {
+            transform: scale(1.08);
+            background: #F5F4F0;
+        }
+
+        .s1-play-btn svg {
+            width: 24px;
+            height: 24px;
+            fill: #080A0E;
+            margin-left: 4px;
+        }
+
+        /* trust strip */
+        .s1-trust {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .s1-trust-item {
+            display: inline-flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: var(--r-full);
+            padding: 6px 16px;
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 13px;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+        }
+
+        .s1-trust-item svg {
+            width: 12px;
+            height: 12px;
+            margin-right: 8px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            flex-shrink: 0;
+        }
+
+        /* floating KPI chip */
+        .s1-kpi {
+            position: absolute;
+            bottom: 32px;
+            left: -40px;
+            background: rgba(26, 30, 39, 0.95);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: var(--r-xl);
+            padding: 16px 20px;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+            min-width: 190px;
+            text-align: left;
+            z-index: 10;
+        }
+
+        @media (max-width: 991px) {
+            .s1-kpi {
+                position: relative;
+                bottom: 0;
+                left: 0;
+                margin: 20px auto 0;
+                width: max-content;
+            }
+        }
+
+        .s1-kpi-row {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 6px;
+        }
+
+        .s1-kpi-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 3px;
+            background: rgba(212, 255, 0, .15);
+            border: 1px solid rgba(212, 255, 0, .25);
+            border-radius: var(--r-base);
+            padding: 2px 7px;
+        }
+
+        .s1-kpi-chip svg {
+            width: 10px;
+            height: 10px;
+            stroke: #D4FF00;
+            fill: none;
+            stroke-width: 2.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            flex-shrink: 0;
+        }
+
+        .s1-kpi-chip span {
+            font-size: 10px;
+            font-weight: 700;
+            color: #D4FF00;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .s1-kpi-value {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            color: #D4FF00;
+            line-height: 1;
+            margin-bottom: 4px;
+        }
+
+        .s1-kpi-label {
+            color: #A2AABF;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-weight: 500;
+        }
+
+        /* s1 CTA button block */
+        .s1-cta-wrap {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 16px;
+        }
+
+        .s1-cta-eyebrow {
+            font-size: 14px;
+            font-weight: 600;
+            color: #E8800A;
+            margin-bottom: 8px;
+            letter-spacing: 0.02em;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .s1-cta-eyebrow::before {
+            content: "";
+            width: 6px;
+            height: 6px;
+            background: #E8800A;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .s1-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: #E8800A;
+            color: #FFFFFF;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            letter-spacing: 0.01em;
+            padding: 16px 36px;
+            border-radius: var(--r-full);
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+            box-shadow: 0 4px 24px rgba(232, 128, 10, .35);
+            transition: background .18s, transform .18s, box-shadow .18s;
+        }
+
+        .s1-cta:hover {
+            background: #FF971D;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 32px rgba(232, 128, 10, .45);
+        }
+
+        .s1-cta svg {
+            width: 18px;
+            height: 18px;
+            stroke: currentColor;
+            fill: none;
+            stroke-width: 2.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            flex-shrink: 0;
+            transition: transform 0.18s;
+        }
+
+        .s1-cta:hover svg {
+            transform: translateX(4px);
+        }
+
+        /* See it in Action neon pointer */
+        .s1-action-pointer {
+            position: absolute;
+            top: -45px;
+            right: -110px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transform: rotate(12deg);
+            z-index: 10;
+        }
+
+        .s1-action-pointer span {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            color: #D4FF00;
+            white-space: nowrap;
+        }
+
+        .s1-action-pointer svg {
+            width: 60px;
+            height: 60px;
+            margin-top: -5px;
+            transform: rotate(-10deg);
+        }
+
+        @media (max-width: 991px) {
+            .s1-action-pointer {
+                display: none;
+            }
+        }
+
+
+
+        /* ══════════════════════════════════════════════════════════════
+
+       SECTION 2 — PROOF STAT
+
+    ══════════════════════════════════════════════════════════════ */
+
+
+        .s2 {
+            background: var(--surface-lowest);
+            padding: var(--section-pad) 40px;
+            border-top: 1px solid var(--outline-variant);
+            text-align: center;
+        }
+
+        .s2-inner {
+            max-width: 1080px;
+            margin: 0 auto;
+        }
+
+        .s2-lead {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 17px;
+            font-weight: 400;
+            line-height: 1.6;
+            color: var(--on-surface-variant);
+        }
+
+        .s2-lead .ph {
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 700;
+            color: var(--on-surface);
+        }
+
+        .s2-number {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(80px, 16vw, 156px);
+            font-weight: 400;
+            line-height: 1;
+            letter-spacing: 0.02em;
+            color: var(--primary);
+            margin: 16px 0 12px;
+            display: block;
+        }
+
+        .s2-trail {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 17px;
+            font-weight: 400;
+            line-height: 1.6;
+            color: var(--on-surface-variant);
+        }
+
+        .s2-support {
+            display: inline-block;
+            margin-top: 32px;
+            background: rgba(232, 128, 10, 0.06);
+            border: 1px solid rgba(232, 128, 10, 0.16);
+            border-radius: var(--r-full);
+            padding: 8px 24px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 15px;
+            font-weight: 600;
+            color: #1A1E27;
+        }
+
+        /* brand logos grid */
+        .s2-logos-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 40px 24px;
+            align-items: center;
+            justify-items: center;
+            margin-top: 48px;
+            padding-top: 48px;
+            border-top: 1px solid var(--outline-variant);
+        }
+
+        @media (max-width: 991px) {
+            .s2-logos-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 32px 16px;
+            }
+        }
+
+
+
+        .s3 {
+            background: var(--background);
+            padding: var(--section-pad) var(--gutter);
+            border-top: 1px solid var(--outline-variant);
+            border-bottom: 1px solid var(--outline-variant);
+        }
+
+        .s3-inner {
+            max-width: 1140px;
+            margin: 0 auto;
+        }
+
+        .s3-header {
+            font-family: 'Oswald', sans-serif;
+            font-size: clamp(36px, 4.5vw, 56px);
+            font-weight: 500;
+            line-height: 1.15;
+            letter-spacing: -0.015em;
+            color: var(--on-surface);
+            text-align: center;
+            margin: 0 auto 56px;
+        }
+
+        .s3-header span {
+            color: var(--primary);
+        }
+
+        .s3-cards {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 24px;
+            margin-bottom: 48px;
+        }
+
+        @media (max-width: 991px) {
+            .s3-cards {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+        }
+
+        .s3-card {
+            padding: 40px 32px;
+            background: #FFFFFF;
+            border: 1px solid rgba(194, 197, 204, 0.5);
+            border-radius: var(--r-xl);
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .s3-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .s3-card-title {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            line-height: 1.3;
+            letter-spacing: -0.015em;
+            color: var(--on-surface);
+            margin-bottom: 12px;
+            margin-top: 16px;
+        }
+
+        .s3-p {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 15px;
+            font-weight: 400;
+            line-height: 1.65;
+            color: var(--on-surface-variant);
+        }
+
+
+        @media (max-width: 576px) {
+            .s2-logos-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 24px 12px;
+            }
+        }
+
+        .s2-logo-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #000000;
+            opacity: 1;
+            transition: transform 0.2s, opacity 0.2s;
+            user-select: none;
+            text-align: center;
+        }
+
+        .s2-logo-item:hover {
+            opacity: 0.7;
+            transform: translateY(-1px);
+        }
+
+        .brand-logo-flex {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+
+
+        /* ══════════════════════════════════════════════════════════════
+
+       SECTION 3 — TIMELINE NODES
+
+    ══════════════════════════════════════════════════════════════ */
+
+        .s3-card-top {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+            width: 100%;
+            justify-content: center;
+        }
+
+        .s3-pill {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: #FFFFFF;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .s3-connector {
+            flex: 1;
+            height: 2px;
+            background: var(--outline-variant);
+            max-width: 80px;
+        }
+
+        .s3-img {
+            width: 100%;
+            height: 180px;
+            background: #FFF8EB;
+            border: 1px solid rgba(232, 128, 10, 0.15);
+            border-radius: var(--r-xl);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .s3-img svg {
+            width: 100%;
+            height: 100%;
+            max-width: 100%;
+            max-height: 100%;
+            display: block;
+        }
+
+        /* ══════════════════════════════════════════════════════════════
+
+       SECTION 4 — QUOTE-FORWARD
+
+    ══════════════════════════════════════════════════════════════ */
+
+
+        .s4 {
+            background: var(--background);
+            padding: var(--section-pad) var(--gutter);
+            border-top: 1px solid var(--outline-variant);
+        }
+
+        .s4-inner {
+            max-width: 1140px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 320px 1fr;
+            gap: 64px;
+            align-items: flex-start;
+        }
+
+        @media (max-width: 991px) {
+            .s4-inner {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            .s4-founder-col {
+                align-items: center !important;
+            }
+            .s4-badge {
+                width: 100% !important;
+                max-width: 260px !important;
+            }
+        }
+
+        /* Founder Left Column */
+        .s4-founder-col {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 16px;
+            width: 100%;
+        }
+
+        .s4-founder-photo {
+            width: 100%;
+            aspect-ratio: 4 / 5;
+            border-radius: var(--r-xl);
+            overflow: hidden;
+            background: #D9D9D9;
+            box-shadow: var(--shadow-md);
+            border: 1px solid rgba(194, 197, 204, 0.4);
+        }
+
+        .s4-founder-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(100%);
+            display: block;
+        }
+
+        .s4-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8px 20px;
+            border: 1px dashed rgba(26, 30, 39, 0.25);
+            border-radius: var(--r-full);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--on-surface-variant);
+            width: max-content;
+            letter-spacing: 0.01em;
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Text Right Column */
+        .s4-text-col {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .s4-pullquote {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(38px, 5.5vw, 60px);
+            font-weight: 400;
+            line-height: 1.05;
+            letter-spacing: 0.02em;
+            color: var(--on-surface);
+            margin-bottom: 24px;
+        }
+
+        .s4-pullquote span {
+            color: var(--primary);
+        }
+
+        .s4-highlight {
+            color: #E8800A;
+            font-weight: 600;
+            background: #FFF3E1;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+
+        .s4-body {
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 24px;
+
+            margin-bottom: 36px;
+
+        }
+
+
+        .s4-p {
+
+            font-family: 'DM Sans', sans-serif;
+
+            font-size: 18px;
+
+            font-weight: 400;
+
+            line-height: 1.75;
+
+            color: var(--on-surface-variant);
+
+        }
+
+
+        .s4-attribution {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 14px;
+
+            padding: 24px 0;
+
+            border-top: 1px solid var(--outline-variant);
+
+            border-bottom: 1px solid var(--outline-variant);
+
+            margin-bottom: 28px;
+
+        }
+
+
+        .s4-avatar {
+
+            width: 52px;
+
+            height: 52px;
+
+            border-radius: 50%;
+
+            background: linear-gradient(135deg, #1A2540, #0D1119);
+
+            border: 1.5px solid var(--outline-variant);
+
+            flex-shrink: 0;
+
+        }
+
+
+        .s4-attr-name {
+
+            font-family: 'DM Sans', sans-serif;
+
+            font-size: 15px;
+
+            font-weight: 600;
+
+            color: var(--on-surface);
+
+        }
+
+
+        .s4-attr-role {
+
+            font-family: 'DM Sans', sans-serif;
+
+            font-size: 13px;
+
+            color: var(--on-surface-variant);
+
+            margin-top: 2px;
+
+        }
+
+
+
+
+        /* ══════════════════════════════════════════════════════════════
+
+       SECTION 5 — 2×2 DATA CARDS
+
+    ══════════════════════════════════════════════════════════════ */
+
+
+        .s5 {
+            background: var(--surface-lowest);
+            padding: var(--section-pad) var(--gutter);
+            border-top: 1px solid var(--outline-variant);
+            position: relative;
+        }
+
+        .s5-inner {
+            max-width: 1140px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .s5-intro {
+            max-width: 800px;
+            margin: 0 auto 56px;
+            text-align: center;
+        }
+
+        .s5-header {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(36px, 4.5vw, 56px);
+            font-weight: 400;
+            line-height: 1.05;
+            letter-spacing: 0.02em;
+            color: var(--on-surface);
+            margin-bottom: 16px;
+        }
+
+        .s5-header span {
+            color: var(--primary);
+            display: block;
+            margin-top: 4px;
+        }
+
+        .s5-sub {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 17px;
+            font-weight: 400;
+            line-height: 1.7;
+            color: var(--on-surface-variant);
+        }
+
+        /* Slider elements */
+        .s5-slider-viewport {
+            overflow: hidden;
+            width: 100%;
+            padding: 10px 0;
+        }
+
+        .s5-slider-track {
+            display: flex;
+            gap: 24px;
+            width: max-content;
+            transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        @media (max-width: 991px) {
+            .s5-slider-track {
+                gap: 20px;
+            }
+        }
+
+        /* Chat card styles */
+        .s5-chat-card {
+            border-radius: var(--r-xl);
+            padding: 40px 32px 32px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 440px;
+            box-shadow: var(--shadow-md);
+            border: 1px solid rgba(194, 197, 204, 0.4);
+            position: relative;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        /* Jasmine & Reena (Darker Slate BG) */
+        .s5-chat-card.slate-theme {
+            background: #909CB4;
+            color: #FFFFFF;
+        }
+
+        /* Marcus (Lighter Cream BG) */
+        .s5-chat-card.cream-theme {
+            background: #EDEEF0;
+            color: #10161D;
+        }
+
+        @media (max-width: 991px) {
+            .s5-chat-card {
+                width: 320px;
+                flex-shrink: 0;
+            }
+        }
+
+        .s5-chat-history {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            margin-bottom: 32px;
+        }
+
+        .chat-sender-label {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+            display: block;
+        }
+
+        .s5-chat-card.slate-theme .chat-sender-label.client-label {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .s5-chat-card.cream-theme .chat-sender-label.client-label {
+            color: rgba(16, 22, 29, 0.6);
+        }
+
+        .s5-chat-card.slate-theme .chat-sender-label.team-label {
+            color: rgba(255, 255, 255, 0.85);
+        }
+
+        .s5-chat-card.cream-theme .chat-sender-label.team-label {
+            color: rgba(16, 22, 29, 0.8);
+        }
+
+        /* Client message bubble */
+        .client-bubble-wrap {
+            align-self: flex-start;
+            max-width: 90%;
+            text-align: left;
+        }
+
+        .client-bubble {
+            position: relative;
+            background: #FFFFFF;
+            color: #10161D;
+            border-radius: 16px;
+            border-top-left-radius: 0;
+            padding: 14px 18px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+            font-size: 14px;
+            font-weight: 550;
+            line-height: 1.5;
+        }
+
+        .client-bubble::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -10px;
+            width: 10px;
+            height: 14px;
+            background: #FFFFFF;
+            clip-path: polygon(100% 0, 0 0, 100% 100%);
+        }
+
+        /* Team message bubble */
+        .team-bubble-wrap {
+            align-self: flex-end;
+            max-width: 90%;
+            text-align: right;
+        }
+
+        .team-bubble {
+            position: relative;
+            background: #10161D;
+            color: #FFFFFF;
+            border-radius: 16px;
+            border-bottom-right-radius: 0;
+            padding: 14px 18px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            font-size: 14px;
+            font-weight: 500;
+            line-height: 1.5;
+            text-align: left;
+        }
+
+        .team-bubble::before {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            right: -10px;
+            width: 10px;
+            height: 14px;
+            background: #10161D;
+            clip-path: polygon(0 0, 0 100%, 100% 100%);
+        }
+
+        /* Client Footer Row */
+        .s5-chat-footer {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding-top: 16px;
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .s5-chat-card.cream-theme .s5-chat-footer {
+            border-top-color: rgba(16, 22, 29, 0.1);
+        }
+
+        .s5-client-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            object-fit: cover;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .s5-client-name {
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .s5-chat-card.slate-theme .s5-client-name {
+            color: #FFFFFF;
+        }
+
+        .s5-chat-card.cream-theme .s5-client-name {
+            color: #10161D;
+        }
+
+        /* Slider Controls */
+        .s5-controls-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 40px;
+        }
+
+        .s5-dots {
+            display: flex;
+            gap: 8px;
+            margin: 0 auto;
+        }
+
+        .s5-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(16, 22, 29, 0.2);
+            cursor: pointer;
+            transition: background-color 0.2s, transform 0.2s;
+        }
+
+        .s5-dot.active {
+            background: #E8800A;
+            transform: scale(1.2);
+        }
+
+        .s5-arrows {
+            display: flex;
+            gap: 12px;
+        }
+
+        .s5-arrow {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: #EDEEF0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background-color 0.2s, color 0.2s, transform 0.1s;
+            color: #10161D;
+            user-select: none;
+        }
+
+        .s5-arrow:hover {
+            background: #E8800A;
+            color: #FFFFFF;
+        }
+
+        .s5-arrow:active {
+            transform: scale(0.95);
+        }
+
+        .s5-arrow svg {
+            width: 18px;
+            height: 18px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+
+
+        /* ── SECTION 6 · Performance Guarantee ──────────────────── */
+
+        .s6-section {
+            position: relative;
+            background: #1C222E;
+            padding: var(--section-pad) var(--gutter);
+            border-top: 1px solid rgba(255, 255, 255, .05);
+            border-bottom: 1px solid rgba(255, 255, 255, .05);
+            overflow: hidden;
+        }
+
+        .s6-inner {
+            position: relative;
+            z-index: 2;
+            max-width: 1140px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 340px 1fr;
+            gap: 72px;
+            align-items: center;
+        }
+
+        @media (max-width: 991px) {
+            .s6-inner {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                text-align: center;
+            }
+        }
+
+        .s6-numeral-col {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            border-right: 1px solid rgba(255, 255, 255, .08);
+            padding-right: 72px;
+        }
+
+        @media (max-width: 991px) {
+            .s6-numeral-col {
+                border-right: none;
+                padding-right: 0;
+                align-items: center;
+            }
+        }
+
+        .s6-big-num {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 200px;
+            line-height: 0.8;
+            letter-spacing: 0.02em;
+            color: var(--primary);
+            margin: 0;
+        }
+
+        .s6-num-label {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 32px;
+            letter-spacing: 0.06em;
+            color: rgba(255, 255, 255, .7);
+            margin-top: 8px;
+            margin-bottom: 28px;
+            text-transform: uppercase;
+        }
+
+        /* CTA Button under label */
+        .s6-cta-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--primary);
+            color: #FFFFFF;
+            border-radius: var(--r-full);
+            padding: 14px 32px;
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 700;
+            font-size: 15px;
+            text-decoration: none;
+            transition: background-color 0.2s, transform 0.1s;
+            white-space: nowrap;
+        }
+
+        .s6-cta-button:hover {
+            background: #D36000;
+        }
+
+        .s6-cta-button:active {
+            transform: scale(0.98);
+        }
+
+        .s6-content {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .s6-header {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(38px, 4.5vw, 54px);
+            font-weight: 400;
+            line-height: 1.05;
+            letter-spacing: 0.02em;
+            color: #FFFFFF;
+            margin: 0;
+        }
+
+        .s6-body {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .s6-p {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 16.5px;
+            font-weight: 400;
+            line-height: 1.7;
+            color: rgba(255, 255, 255, 0.7);
+            margin: 0;
+        }
+
+        .s6-p strong {
+            color: #FFFFFF;
+            font-weight: 700;
+        }
+
+
+
+
+        /* ── SECTION 7 · Objection Handling (Variant F · FAQ Accordion) ─ */
+
+        .s7-section {
+
+            background: var(--background);
+
+            padding: var(--section-pad) 40px;
+
+            border-top: 1px solid var(--outline-variant);
+
+        }
+
+
+        .s7-inner {
+            max-width: 760px;
+            margin: 0 auto;
+        }
+
+
+        .s7-header {
+
+            text-align: center;
+
+            margin-bottom: 56px;
+
+        }
+
+
+        .s7-eyebrow {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 7px;
+
+            font-size: 11px;
+
+            font-weight: 700;
+
+            letter-spacing: 0.12em;
+
+            text-transform: uppercase;
+
+            color: var(--primary);
+
+            margin-bottom: 14px;
+
+        }
+
+
+        .s7-title {
+
+            font-family: 'Bebas Neue', sans-serif;
+
+            font-size: clamp(36px, 4.5vw, 52px);
+
+            font-weight: 400;
+
+            line-height: 1.0;
+
+            letter-spacing: 0.02em;
+
+            color: var(--on-surface);
+
+            margin-bottom: 16px;
+
+            text-transform: uppercase;
+
+        }
+
+        .s7-title span {
+            color: var(--primary);
+        }
+
+
+        .s7-sub {
+
+            font-size: 16px;
+
+            font-weight: 400;
+
+            line-height: 1.70;
+
+            color: var(--on-surface-variant);
+
+            max-width: 520px;
+
+            margin: 0 auto;
+
+        }
+
+
+        .s7-faq {
+            display: flex;
+            flex-direction: column;
+        }
+
+
+        .s7-item {
+            background: #FFFFFF;
+            border-radius: var(--r-xl);
+            border: 1px solid rgba(194, 197, 204, 0.4);
+            margin-bottom: 20px;
+            box-shadow: var(--shadow-sm);
+            padding: 0 32px;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+
+        .s7-trigger {
+
+            width: 100%;
+
+            display: grid;
+
+            grid-template-columns: auto 1fr auto;
+
+            column-gap: 8px;
+
+            align-items: center;
+
+            padding: 24px 0;
+
+            background: none;
+
+            border: none;
+
+            cursor: pointer;
+
+            text-align: left;
+
+        }
+
+
+        .s7-num-badge {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 18px;
+            font-weight: 500;
+            color: inherit !important;
+            background: none !important;
+            width: auto;
+            height: auto;
+            border-radius: 0;
+            display: inline;
+            margin-right: 0px;
+            flex-shrink: 0;
+        }
+
+        .s7-num-badge::after {
+            content: ".";
+        }
+
+
+        .s7-question {
+
+            font-size: 18px;
+
+            font-weight: 500;
+
+            line-height: 1.35;
+
+            letter-spacing: -0.015em;
+
+            color: var(--on-surface);
+
+            transition: color 0.2s;
+
+        }
+
+        .s7-trigger.is-open .s7-question {
+            color: var(--primary);
+        }
+
+
+        .s7-chevron {
+
+            width: 28px;
+
+            height: 28px;
+
+            border-radius: 50%;
+
+            border: 1.5px solid var(--outline-variant);
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            color: var(--on-surface-variant);
+
+            flex-shrink: 0;
+
+            margin-left: 16px;
+
+            transition: border-color 0.25s, color 0.25s, transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+
+        }
+
+        .s7-trigger.is-open .s7-chevron {
+
+            border-color: var(--primary);
+
+            color: var(--primary);
+
+            transform: rotate(45deg);
+
+        }
+
+
+        .s7-panel {
+
+            overflow: hidden;
+
+            max-height: 0;
+
+            opacity: 0;
+
+            transition: max-height 0.42s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.28s ease;
+
+        }
+
+        .s7-panel.is-open {
+            max-height: 480px;
+            opacity: 1;
+        }
+
+
+        .s7-panel-inner {
+            padding: 0 36px 24px 28px;
+        }
+
+
+        .s7-response {
+
+            font-family: 'DM Sans', sans-serif;
+
+            font-size: 15.5px;
+
+            font-weight: 400;
+
+            line-height: 1.80;
+
+            color: var(--on-surface-variant);
+
+        }
+
+
+
+        /* ── SECTION 8 · Guarantee Restatement + Scarcity (Variant A · Dark Metrics) ─ */
+
+        .s8-section {
+
+            background: var(--background);
+
+            padding: var(--section-pad) 40px;
+
+            border-top: 1px solid var(--outline-variant);
+
+        }
+
+
+        .s8-inner {
+
+            max-width: 1060px;
+
+            margin: 0 auto;
+
+            text-align: center;
+
+        }
+
+
+        .s8-metrics {
+
+            display: grid;
+
+            grid-template-columns: 1fr 1fr 1fr;
+
+            gap: 24px;
+
+            margin-bottom: 64px;
+
+        }
+
+
+        .s8-metric {
+
+            padding: 32px 36px;
+
+            background: var(--surface-lowest);
+
+            border: 1px solid rgba(194, 197, 204, 0.4);
+
+            border-radius: var(--r-xl);
+
+            box-shadow: var(--shadow-sm);
+
+            transition: transform 0.2s, box-shadow 0.2s;
+
+        }
+
+
+        .s8-metric-top {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 12px;
+        }
+
+        .s8-metric-num {
+
+            font-family: 'Bebas Neue', sans-serif;
+
+            font-size: 64px;
+
+            line-height: 1;
+
+            letter-spacing: 0.02em;
+
+            color: var(--primary);
+
+            margin: 0;
+
+            display: flex;
+
+            align-items: center;
+
+        }
+
+
+        .s8-metric-label {
+
+            font-size: 13px;
+
+            font-weight: 600;
+
+            color: var(--on-surface-variant);
+
+            line-height: 1.4;
+
+        }
+
+
+        .s8-header {
+
+            font-family: 'Bebas Neue', sans-serif;
+
+            font-size: clamp(36px, 4.5vw, 56px);
+
+            font-weight: 400;
+
+            line-height: 1.05;
+
+            letter-spacing: 0.02em;
+
+            color: var(--on-surface);
+
+            max-width: 820px;
+
+            margin: 0 auto 48px;
+
+        }
+
+
+        .s8-header .accent {
+            color: var(--primary);
+        }
+
+
+        .s8-copy {
+            max-width: 640px;
+            margin: 0 auto;
+        }
+
+
+        .s8-eyebrow {
+
+            font-size: 11px;
+
+            font-weight: 600;
+
+            letter-spacing: 0.12em;
+
+            text-transform: uppercase;
+
+            color: var(--primary);
+
+            display: block;
+
+            margin-bottom: 16px;
+
+        }
+
+
+        .s8-p {
+
+            font-family: 'DM Sans', sans-serif;
+
+            font-size: 17px;
+
+            font-weight: 400;
+
+            line-height: 1.78;
+
+            color: var(--on-surface-variant);
+
+        }
+
+
+
+        /* ── SECTION 9 · Final CTA ───────────────────────────────── */
+
+        .s9-section {
+
+            background: linear-gradient(150deg, #1A1E27 0%, #272D3C 100%);
+
+            padding: var(--section-pad) 40px;
+
+            position: relative;
+
+            overflow: hidden;
+
+            border-top: 1px solid var(--outline-variant);
+
+        }
+
+
+        .s9-section::before {
+
+            content: '';
+
+            position: absolute;
+
+            inset: 0;
+
+            background: radial-gradient(ellipse at 55% 0%, rgba(232, 128, 10, .07) 0%, transparent 65%);
+
+            pointer-events: none;
+
+        }
+
+
+        .s9-inner {
+
+            max-width: 720px;
+
+            margin: 0 auto;
+
+            position: relative;
+
+            z-index: 1;
+
+        }
+
+
+        .s9-header {
+
+            font-family: 'Bebas Neue', sans-serif;
+
+            font-size: clamp(40px, 5.5vw, 64px);
+
+            font-weight: 400;
+
+            line-height: 1.05;
+
+            letter-spacing: 0.02em;
+
+            color: #EAECF0;
+
+            margin-bottom: 44px;
+
+            text-align: center;
+
+        }
+
+        .s9-header span {
+            color: var(--primary);
+            display: block;
+            margin-top: 8px;
+        }
+
+
+        .s9-body {
+            margin-bottom: 60px;
+        }
+
+
+        .s9-p {
+
+            font-family: 'DM Sans', sans-serif;
+
+            font-size: 18px;
+
+            font-weight: 400;
+
+            line-height: 1.77;
+
+            color: rgba(234, 236, 240, .65);
+
+            text-align: left;
+
+        }
+
+
+        .s9-p+.s9-p {
+            margin-top: 24px;
+        }
+
+
+        .s9-cta-zone {
+
+            display: flex;
+
+            flex-direction: column;
+
+            align-items: center;
+
+            gap: 18px;
+
+            margin-bottom: 52px;
+
+        }
+
+
+        .s9-btn {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 20px 60px;
+
+            background: var(--primary);
+
+            color: #FFFFFF;
+
+            font-family: 'DM Sans', sans-serif;
+
+            font-size: 17px;
+
+            font-weight: 700;
+
+            letter-spacing: -0.01em;
+
+            border: none;
+
+            border-radius: var(--r-full);
+
+            cursor: pointer;
+
+            box-shadow: 0 4px 28px rgba(232, 128, 10, .35), 0 1px 6px rgba(0, 0, 0, .18);
+
+            transition: transform 0.18s ease, background 0.18s ease, box-shadow 0.2s ease;
+
+            text-decoration: none;
+
+        }
+
+
+        .s9-btn:hover {
+
+            background: var(--primary-container);
+
+            transform: translateY(-2px);
+
+            box-shadow: 0 10px 40px rgba(232, 128, 10, .45), 0 2px 10px rgba(0, 0, 0, .22);
+
+        }
+
+
+        .s9-reassurance {
+
+            font-family: 'DM Sans', sans-serif;
+
+            font-size: 13px;
+
+            font-weight: 400;
+
+            color: rgba(234, 236, 240, .35);
+
+            text-align: center;
+
+            letter-spacing: 0.005em;
+
+        }
+
+
+        .s9-expand-wrap {
+
+            text-align: center;
+
+        }
+
+
+        .s9-expand-trigger {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            background: none;
+
+            border: none;
+
+            cursor: pointer;
+
+            padding: 0;
+
+            font-family: 'DM Sans', sans-serif;
+
+            font-size: 15px;
+
+            font-weight: 500;
+
+            color: var(--inverse-primary);
+
+            text-decoration: underline;
+
+            text-decoration-color: rgba(251, 202, 129, .4);
+
+            text-underline-offset: 3px;
+
+        }
+
+
+        .s9-expand-trigger:hover {
+
+            text-decoration-color: var(--inverse-primary);
+
+        }
+
+
+        .s9-expand-trigger .chevron {
+
+            transition: transform 0.32s cubic-bezier(0.4, 0, 0.2, 1);
+
+            flex-shrink: 0;
+
+        }
+
+
+        .s9-expand-trigger.is-open .chevron {
+
+            transform: rotate(180deg);
+
+        }
+
+
+        .s9-panel {
+
+            overflow: hidden;
+
+            max-height: 0;
+
+            opacity: 0;
+
+            transition: max-height 0.48s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.32s ease;
+
+        }
+
+
+        .s9-panel.is-open {
+
+            max-height: 900px;
+
+            opacity: 1;
+
+        }
+
+
+        .s9-panel-inner {
+
+            margin-top: 28px;
+
+            background: rgba(232, 128, 10, .05);
+
+            border: 1px solid rgba(232, 128, 10, .12);
+
+            border-radius: var(--r-xl);
+
+            padding: 36px 40px;
+
+        }
+
+
+        .s9-items {
+            display: flex;
+            flex-direction: column;
+        }
+
+
+        .s9-item {
+
+            padding: 20px 0;
+
+            border-bottom: 1px solid rgba(232, 128, 10, .1);
+
+        }
+
+
+        .s9-item:first-child {
+            padding-top: 0;
+        }
+
+        .s9-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+
+        .s9-item-text {
+
+            font-family: 'DM Sans', sans-serif;
+
+            font-size: 15.5px;
+
+            font-weight: 400;
+
+            line-height: 1.72;
+
+            color: rgba(234, 236, 240, .62);
+
+        }
+
+
+        .s9-item-text .item-lbl {
+
+            font-family: 'DM Sans', sans-serif;
+
+            font-weight: 700;
+
+            font-size: 15px;
+
+            color: var(--inverse-primary);
+
+        }
+
+
+        .s9-panel-close {
+
+            margin-top: 28px;
+
+            padding-top: 24px;
+
+            border-top: 1px solid rgba(232, 128, 10, .1);
+
+            font-family: 'DM Sans', sans-serif;
+
+            font-size: 14.5px;
+
+            font-weight: 400;
+
+            line-height: 1.7;
+
+            color: rgba(234, 236, 240, .42);
+
+            font-style: italic;
+
+        }
+
+
+
+        /* ── HEADER ──────────────────────────────────────────────── */
+
+        .hdr {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            padding: 0 40px;
+            background: #080A0E;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .hdr.scrolled {
+            background: #080A0E;
+            border-bottom-color: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .hdr-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .hdr-wordmark {
+            font-family: 'DM Sans', sans-serif;
+            text-decoration: none;
+            color: #FFFFFF;
+            transition: color 0.15s;
+        }
+
+        .hdr-nav {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .hdr-link {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.85);
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: var(--r-md);
+            transition: background 0.15s, color 0.15s;
+        }
+
+        .hdr-link:hover {
+            background: rgba(255, 255, 255, 0.08);
+            color: #FFFFFF;
+        }
+
+        .hdr-cta {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 22px;
+            background: #E8800A;
+            color: #FFFFFF;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            border: none;
+            border-radius: var(--r-full);
+            cursor: pointer;
+            text-decoration: none;
+            transition: background 0.18s, transform 0.15s;
+            white-space: nowrap;
+        }
+
+        .hdr-cta:hover {
+            background: #FF971D;
+            transform: translateY(-1px);
+        }
+
+
+
+        /* ── FOOTER ──────────────────────────────────────────────── */
+
+        .ftr {
+
+            background: #0D1119;
+
+            padding: 48px 40px 40px;
+
+            border-top: 1px solid rgba(232, 128, 10, .08);
+
+        }
+
+
+        .ftr-inner {
+
+            max-width: 1060px;
+
+            margin: 0 auto;
+
+        }
+
+
+        .ftr-top {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 24px;
+
+            margin-bottom: 32px;
+
+        }
+
+
+        .ftr-brand {
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 8px;
+
+        }
+
+
+        .ftr-wordmark {
+
+            font-family: 'DM Sans', sans-serif;
+
+            font-size: 16px;
+
+            font-weight: 700;
+
+            letter-spacing: -0.022em;
+
+            color: rgba(234, 236, 240, .88);
+
+            text-decoration: none;
+
+        }
+
+
+        .ftr-closing {
+
+            font-family: 'DM Sans', sans-serif;
+
+            font-size: 13px;
+
+            font-weight: 400;
+
+            color: rgba(251, 202, 129, .5);
+
+            letter-spacing: 0.005em;
+
+        }
+
+
+        .ftr-links {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 28px;
+
+            flex-shrink: 0;
+
+        }
+
+
+        .ftr-link {
+
+            font-family: 'DM Sans', sans-serif;
+
+            font-size: 12px;
+
+            font-weight: 500;
+
+            color: rgba(234, 236, 240, .28);
+
+            text-decoration: none;
+
+            letter-spacing: 0.01em;
+
+            transition: color 0.15s;
+
+        }
+
+
+        .ftr-link:hover {
+            color: rgba(234, 236, 240, .6);
+        }
+
+
+        .ftr-compliance {
+
+            padding-top: 24px;
+
+            border-top: 1px solid rgba(255, 255, 255, .05);
+
+            font-family: 'DM Sans', sans-serif;
+
+            font-size: 11.5px;
+
+            font-weight: 400;
+
+            line-height: 1.68;
+
+            color: rgba(234, 236, 240, .2);
+
+        }
+
+
+
+
+        /* ══════════════════════════════════════════════════════════════
+
+       POLISH PASS — focus, motion, responsive
+
+    ══════════════════════════════════════════════════════════════ */
+
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+
+        /* Keyboard focus ring — never removed, only restyled */
+
+        :focus-visible {
+
+            outline: 2px solid var(--primary);
+
+            outline-offset: 3px;
+
+            border-radius: var(--r-base);
+
+        }
+
+        .s1-cta:focus-visible,
+
+        .hdr-cta:focus-visible,
+
+        .s9-btn:focus-visible {
+
+            border-radius: var(--r-full);
+
+        }
+
+        .s7-chevron:focus-visible {
+
+            outline-offset: 2px;
+
+        }
+
+        :focus:not(:focus-visible) {
+            outline: none;
+        }
+
+
+        /* Only stop the decorative pulse ring for reduced-motion users */
+
+        @media (prefers-reduced-motion: reduce) {
+
+            .play-pulse {
+                animation: none;
+            }
+
+            html {
+                scroll-behavior: auto;
+            }
+
+        }
+
+
+        /* ════════════════════════════════════════════════════════════
+
+       MOBILE-FIRST RESPONSIVE
+
+       Base = 375px  ·  min-width: 768px tablet  ·  min-width: 1080px desktop
+
+    ════════════════════════════════════════════════════════════ */
+
+
+        /* ── Mobile base (≤ 767px) ───────────────────────────────── */
+
+
+        /* Sections with hard-coded 40px horizontal padding → fluid gutter */
+
+        .hdr {
+            padding: 0 var(--gutter);
+        }
+
+        .s2 {
+            padding: var(--section-pad) var(--gutter);
+        }
+
+        .s7-section {
+            padding: var(--section-pad) var(--gutter);
+        }
+
+        .s8-section {
+            padding: var(--section-pad) var(--gutter);
+        }
+
+        .s9-section {
+            padding: var(--section-pad) var(--gutter);
+        }
+
+        .ftr {
+            padding: 40px var(--gutter) 32px;
+        }
+
+
+        /* Header nav */
+
+        .hdr-link {
+            display: none;
+        }
+
+
+        /* S1 */
+
+        .s1-kpi {
+            display: none;
+        }
+
+        .s1-vsl {
+            padding-bottom: 0;
+        }
+
+        .s1-sub {
+            font-size: 17px;
+        }
+
+        .s1-trust {
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px 16px;
+        }
+
+        .s1-cta {
+            width: 100%;
+            justify-content: center;
+            font-size: 15px;
+            padding: 16px 32px;
+        }
+
+
+        /* S3 — single column stacked */
+
+        .s3-cards {
+            grid-template-columns: 1fr;
+            border-radius: var(--r-lg);
+        }
+
+        .s3-card {
+            padding: 24px 20px;
+            border-right: none;
+            border-bottom: 1px solid var(--outline-variant);
+        }
+
+        .s3-card:last-child {
+            border-bottom: none;
+        }
+
+
+        /* S4 */
+
+        .s4-p {
+            font-size: 16px;
+        }
+
+
+        /* S5 — fully stacked */
+
+        .s5-intro {
+            margin-bottom: 32px;
+        }
+
+        .s5-featured {
+            grid-template-columns: 1fr;
+        }
+
+        .s5-feat-img {
+            aspect-ratio: 16/9;
+            order: -1;
+        }
+
+        .s5-feat-content {
+            padding: 24px 20px 28px;
+        }
+
+        .s5-trio {
+            grid-template-columns: 1fr;
+        }
+
+
+        /* S6 — inline numeral beside label, content stacked below */
+
+        .s6-inner {
+            grid-template-columns: 1fr;
+            gap: 40px;
+        }
+
+        .s6-numeral-col {
+
+            flex-direction: row;
+
+            align-items: baseline;
+
+            gap: 16px;
+
+            border-right: none;
+
+            padding-right: 0;
+
+            border-bottom: 1px solid rgba(255, 255, 255, .06);
+
+            padding-bottom: 40px;
+
+        }
+
+        .s6-big-num {
+            font-size: clamp(64px, 20vw, 120px);
+            line-height: 1;
+        }
+
+        .s6-num-label {
+            font-size: 22px;
+            margin-top: 0;
+        }
+
+
+        /* S7 — tighter accordion */
+
+        .s7-trigger {
+            padding: 22px 0;
+            gap: 12px;
+        }
+
+        .s7-panel-inner {
+            padding: 0 8px 24px 40px;
+        }
+
+
+        /* S8 — single column */
+
+        .s8-metrics {
+            grid-template-columns: 1fr;
+            gap: 16px;
+        }
+
+        .s8-metric {
+            padding: 24px 28px;
+        }
+
+
+        /* S9 */
+
+        .s9-btn {
+            padding: 18px 32px;
+            font-size: 16px;
+            width: 100%;
+        }
+
+        .s9-panel-inner {
+            padding: 28px 24px;
+        }
+
+
+        /* Footer */
+
+        .ftr-top {
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .ftr-links {
+            flex-wrap: wrap;
+            gap: 16px 24px;
+        }
+
+
+
+        /* ── 768px+: tablet ──────────────────────────────────────── */
+
+        @media (min-width: 768px) {
+
+            :root {
+                --section-pad: 88px;
+                --gutter: 24px;
+            }
+
+
+            /* Header */
+
+            .hdr-link {
+                display: inline;
+            }
+
+
+            /* S1 */
+
+            .s1-kpi {
+                display: block;
+            }
+
+            .s1-vsl {
+                padding-bottom: 32px;
+            }
+
+            .s1-sub {
+                font-size: 18px;
+                max-width: 640px;
+            }
+
+            .s1-trust {
+                flex-wrap: nowrap;
+                justify-content: center;
+                gap: 18px;
+            }
+
+            .s1-cta {
+                width: auto;
+                font-size: 17px;
+                padding: 18px 40px;
+            }
+
+
+            /* S3 — still 1-col at tablet, roomier padding */
+
+            .s3-card {
+                padding: 32px 28px;
+            }
+
+
+            /* S4 */
+
+            .s4-p {
+                font-size: 18px;
+            }
+
+
+            /* S5 — featured 2-col, trio 2-col */
+
+            .s5-intro {
+                margin-bottom: 48px;
+            }
+
+            .s5-featured {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .s5-feat-img {
+                aspect-ratio: 4/3;
+                order: 0;
+            }
+
+            .s5-feat-content {
+                padding: 36px 32px;
+            }
+
+            .s5-trio {
+                grid-template-columns: 1fr 1fr;
+            }
+
+
+            /* S6 — larger numeral at tablet */
+
+            .s6-big-num {
+                font-size: clamp(72px, 18vw, 140px);
+            }
+
+            .s6-num-label {
+                font-size: 26px;
+            }
+
+
+            /* S8 — 3-col */
+
+            .s8-metrics {
+                grid-template-columns: 1fr 1fr 1fr;
+                gap: 24px;
+            }
+
+            .s8-metric {
+                padding: 32px 36px;
+            }
+
+
+            /* S9 */
+
+            .s9-btn {
+                width: auto;
+                padding: 20px 60px;
+                font-size: 17px;
+            }
+
+            .s9-panel-inner {
+                padding: 36px 40px;
+            }
+
+
+            /* Footer */
+
+            .ftr-top {
+                flex-direction: row;
+            }
+
+            .ftr-links {
+                flex-wrap: nowrap;
+                gap: 20px 32px;
+            }
+
+        }
+
+
+
+        /* ── 1080px+: desktop ────────────────────────────────────── */
+
+        @media (min-width: 1080px) {
+
+            :root {
+                --section-pad: 120px;
+                --gutter: 40px;
+            }
+
+
+            /* S3 — 3-col */
+
+            .s3-cards {
+                grid-template-columns: 1fr 1fr 1fr;
+                border-radius: var(--r-xl);
+            }
+
+            .s3-card {
+                padding: 36px 32px;
+                border-right: 1px solid var(--outline-variant);
+                border-bottom: none;
+            }
+
+            .s3-card:last-child {
+                border-right: none;
+            }
+
+
+            /* S5 — featured 50/50, trio 3-col */
+
+            .s5-feat-img {
+                aspect-ratio: 4/3;
+            }
+
+            .s5-feat-content {
+                padding: 48px 44px;
+            }
+
+            .s5-trio {
+                grid-template-columns: 1fr 1fr 1fr;
+            }
+
+
+            /* S6 — full side-by-side with giant numeral */
+
+            .s6-inner {
+
+                grid-template-columns: 340px 1fr;
+
+                gap: 72px;
+
+            }
+
+            .s6-numeral-col {
+
+                flex-direction: column;
+
+                align-items: flex-start;
+
+                border-right: 1px solid rgba(255, 255, 255, .06);
+
+                padding-right: 72px;
+
+                border-bottom: none;
+
+                padding-bottom: 0;
+
+                gap: 0;
+
+            }
+
+            .s6-big-num {
+                font-size: 220px;
+                line-height: 0.85;
+            }
+
+            .s6-num-label {
+                font-size: 36px;
+                margin-top: 12px;
+            }
+
+        }
+    </style>
+
+</head>
+
+<body>
+
+
+    <!-- ══ HEADER ══ -->
+
+    <header class="hdr" id="site-header">
+        <div class="hdr-inner">
+            <a href="#" class="hdr-wordmark">
+                <svg viewBox="0 0 160 36" fill="none" xmlns="http://www.w3.org/2000/svg"
+                    style="height: 28px; display: block;">
+                    <path d="M12 26L20 8L28 26" stroke="currentColor" stroke-width="4.5" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                    <path d="M34 26V8L42 18L50 8V26" stroke="currentColor" stroke-width="4.5" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                    <path d="M56 8H70L56 26H70" stroke="#E8800A" stroke-width="4.5" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                    <circle cx="74" cy="25" r="2.5" fill="#E8800A" />
+                    <text x="84" y="22" fill="currentColor" font-family="'DM Sans', sans-serif" font-size="14"
+                        font-weight="700" letter-spacing="0.1em">EXPAND</text>
+                </svg>
+            </a>
+            <nav class="hdr-nav">
+                <a href="#how-it-works" class="hdr-link">How It Works</a>
+                <a href="#book-audit" class="hdr-cta">Book Your Free Audit</a>
+            </nav>
+        </div>
+    </header>
+
+
+    <!-- ══════════════════════════════════════════════════════════
+
+       SECTION 1 — CENTERED AUTHORITY
+
+       Source: section-01-layout-explorations.html · Variant A
+
+  ══════════════════════════════════════════════════════════ -->
+
+    <section class="s1">
+        <div class="s1-shader">
+            <svg viewBox="0 0 1400 600" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+                <defs>
+                    <filter id="silkBlur">
+                        <feGaussianBlur stdDeviation="6" />
+                    </filter>
+                </defs>
+                <g filter="url(#silkBlur)">
+                    <path d="M-100 -50 C200 50, 500 120, 800 250 C1100 380, 1300 480, 1600 620" stroke="rgba(200,210,230,0.5)" stroke-width="12" fill="none"/>
+                    <path d="M-80 20 C220 110, 520 180, 820 310 C1120 440, 1320 530, 1620 670" stroke="rgba(180,190,210,0.4)" stroke-width="8" fill="none"/>
+                    <path d="M-120 -100 C180 0, 480 70, 780 200 C1080 330, 1280 420, 1580 560" stroke="rgba(190,200,220,0.45)" stroke-width="10" fill="none"/>
+                    <path d="M-60 80 C240 160, 540 230, 840 360 C1140 490, 1340 570, 1640 700" stroke="rgba(170,180,200,0.35)" stroke-width="6" fill="none"/>
+                    <path d="M-140 -150 C160 -50, 460 20, 760 150 C1060 280, 1260 370, 1560 510" stroke="rgba(195,205,225,0.3)" stroke-width="9" fill="none"/>
+                    <path d="M-40 140 C260 220, 560 290, 860 420 C1160 550, 1360 630, 1660 760" stroke="rgba(175,185,205,0.25)" stroke-width="7" fill="none"/>
+                </g>
+            </svg>
+        </div>
+        <div class="s1-inner">
+            <h1 class="s1-headline">
+                Most Accounts We Audit Are Losing
+                <span class="money">$8,000 to $50,000</span>
+                Every Month To Three Fixable Problems.
+            </h1>
+            <p class="s1-sub">
+                Not the product. The advertising, listings, and catalog have stopped working together. Watch the video
+                to see what those problems are, then let us show you which ones are in yours.
+            </p>
+            <div class="s1-vsl">
+                <!-- Neon See It In Action Pointer -->
+                <div class="s1-action-pointer">
+                    <span>See It In Action</span>
+                    <svg viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M10 10 C25 20, 25 35, 12 42" stroke="#D4FF00" stroke-width="2.5" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                        <path d="M7 32 L12 42 L22 39" stroke="#D4FF00" stroke-width="2.5" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg>
+                </div>
+
+                <div class="vsl-card">
+                    <div class="s1-thumb">
+                        <div class="s1-thumb-inner-text">IN 90 DAYS</div>
+                        <!-- Graph visual in background -->
+                        <svg class="s1-thumb-graph" viewBox="0 0 800 450" fill="none" xmlns="http://www.w3.org/2000/svg"
+                            style="position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none;">
+                            <path d="M-50 380 L180 280 L350 330 L680 100" stroke="#FFC56D" stroke-width="12"
+                                stroke-linecap="round" stroke-linejoin="round" opacity="0.25" />
+                            <path d="M640 100 H680 V140" stroke="#FFC56D" stroke-width="12" stroke-linecap="round"
+                                stroke-linejoin="round" opacity="0.25" />
+                        </svg>
+
+                        <div class="play-anchor">
+
+                            <div class="s1-play-btn" role="button" tabindex="0"
+                                aria-label="Play video: Watch the audit breakdown">
+
+                                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                                    <path d="M8 5v14l11-7z" />
+                                </svg>
+
+                            </div>
+
+                        </div>
+
+                        <div class="s1-thumb-footer">
+
+                            <span>Watch the audit breakdown</span>
+
+                            <span class="s1-duration">12:34</span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="s1-kpi">
+
+                    <div class="s1-kpi-row">
+
+                        <div class="s1-kpi-chip">
+
+                            <svg viewBox="0 0 12 12">
+                                <path d="M6 10V2M2 6l4-4 4 4" />
+                            </svg>
+
+                            <span>Recovered</span>
+
+                        </div>
+
+                    </div>
+
+                    <div class="s1-kpi-value"><span>$24k</span></div>
+
+                    <div class="s1-kpi-label label-caps">avg. monthly bleed recovered</div>
+
+                </div>
+
+            </div>
+
+
+            <a href="#" class="s1-cta">
+
+                Book Your Free Amazon Audit
+
+                <svg viewBox="0 0 18 18">
+                    <path d="M3 9h12M10 4l5 5-5 5" />
+                </svg>
+
+            </a>
+
+
+            <div class="s1-trust">
+
+                <div class="s1-trust-item label-caps">
+
+                    <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+                        <path d="M2.5 8.5l3.5 3.5 7.5-8" />
+                    </svg>
+
+                    Free Audit
+
+                </div>
+
+                <div class="s1-sep" aria-hidden="true"></div>
+
+                <div class="s1-trust-item label-caps">
+
+                    <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+                        <path d="M2.5 8.5l3.5 3.5 7.5-8" />
+                    </svg>
+
+                    No Commitment
+
+                </div>
+
+                <div class="s1-sep" aria-hidden="true"></div>
+
+                <div class="s1-trust-item label-caps">
+
+                    <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+                        <path d="M2.5 8.5l3.5 3.5 7.5-8" />
+                    </svg>
+
+                    48 Hour Turnaround
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ══════════════════════════════════════════════════════════
+
+       SECTION 2 — PROOF STAT
+
+       Source: section-02-layout-explorations-v2.html · Variant A
+
+  ══════════════════════════════════════════════════════════ -->
+
+    <section class="s2">
+        <div class="s2-inner">
+            <!-- Amazon Logo at the top -->
+            <div class="s2-amazon-logo" style="display: flex; justify-content: center; margin-bottom: 24px;">
+                <svg viewBox="0 0 603 182" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="height: 28px; width: auto; display: block; color: #000000;">
+                    <path d="m 374.00642,142.18404 c -34.99948,25.79739 -85.72909,39.56123 -129.40634,39.56123 -61.24255,0 -116.37656,-22.65135 -158.08757,-60.32496 -3.2771,-2.96252 -0.34083,-6.9999 3.59171,-4.69283 45.01431,26.19064 100.67269,41.94697 158.16623,41.94697 38.774689,0 81.4295,-8.02237 120.6499,-24.67006 5.92501,-2.51683 10.87999,3.88009 5.08607,8.17965" fill="#FF9900" />
+                    <path d="m 388.55678,125.53635 c -4.45688,-5.71527 -29.57261,-2.70033 -40.84585,-1.36327 -3.43442,0.41947 -3.95874,-2.56925 -0.86517,-4.71905 20.00346,-14.07844 52.82696,-10.01483 56.65462,-5.2958 3.82764,4.74526 -0.99624,37.64741 -19.79373,53.35128 -2.88385,2.41195 -5.63662,1.12734 -4.35198,-2.07113 4.2209,-10.53917 13.68519,-34.16054 9.20211,-39.90203" fill="#FF9900" />
+                    <path d="M 348.49744,20.06598 V 6.38079 c 0,-2.07113 1.57301,-3.46062 3.46062,-3.46062 h 61.26875 c 1.96628,0 3.53929,1.41571 3.53929,3.46062 v 11.71893 c -0.0262,1.96626 -1.67788,4.53551 -4.61418,8.59912 l -31.74859,45.32893 c 11.79759,-0.28837 24.25059,1.46814 34.94706,7.49802 2.41195,1.36327 3.06737,3.35575 3.25089,5.32203 V 99.4506 c 0,1.99248 -2.20222,4.32576 -4.5093,3.1198 -18.84992,-9.88376 -43.887,-10.95865 -64.72939,0.10487 -2.12356,1.15354 -4.35199,-1.15354 -4.35199,-3.14602 V 85.66054 c 0,-2.22843 0.0262,-6.02989 2.25463,-9.41186 l 36.78224,-52.74829 h -32.01076 c -1.96626,0 -3.53927,-1.38948 -3.53927,-3.43441" fill="currentColor" id="path12" />
+                    <path d="m 124.99883,105.45424 h -18.64017 c -1.78273,-0.13107 -3.19845,-1.46813 -3.32954,-3.17224 V 6.61676 c 0,-1.91383 1.59923,-3.43442 3.59171,-3.43442 h 17.38176 c 1.80898,0.0786 3.25089,1.46814 3.38199,3.19845 v 12.50545 h 0.34082 c 4.53551,-12.08598 13.05597,-17.7226 24.53896,-17.7226 11.66649,0 18.95477,5.63662 24.19814,17.7226 4.5093,-12.08598 14.76008,-17.7226 25.74495,-17.7226 7.81262,0 16.35931,3.22467 21.57646,10.46052 5.89879,8.04857 4.69281,19.74128 4.69281,29.99208 l -0.0262,60.37739 c 0,1.91383 -1.59923,3.46061 -3.59171,3.46061 h -18.61397 c -1.86138,-0.13107 -3.35574,-1.62543 -3.35574,-3.46061 V 51.29025 c 0,-4.03739 0.36702,-14.10466 -0.52434,-17.93233 -1.38949,-6.42311 -5.55797,-8.23209 -10.95865,-8.23209 -4.5093,0 -9.22833,3.01494 -11.14216,7.83885 -1.91383,4.8239 -1.73031,12.89867 -1.73031,18.32557 v 50.70338 c 0,1.91383 -1.59923,3.46061 -3.59171,3.46061 h -18.61395 c -1.88761,-0.13107 -3.35576,-1.62543 -3.35576,-3.46061 L 152.946,51.29025 c 0,-10.67025 1.75651,-26.37415 -11.48298,-26.37415 -13.39682,0 -12.87248,15.31063 -12.87248,26.37415 v 50.70338 c 0,1.91383 -1.59923,3.46061 -3.59171,3.46061" fill="currentColor" id="path14" />
+                    <path d="m 469.51439,1.16364 c 27.65877,0 42.62858,23.75246 42.62858,53.95427 0,29.17934 -16.54284,52.32881 -42.62858,52.32881 -27.16066,0 -41.94697,-23.75246 -41.94697,-53.35127 0,-29.78234 14.96983,-52.93181 41.94697,-52.93181 m 0.15729,19.53156 c -13.73761,0 -14.60278,18.71881 -14.60278,30.38532 0,11.69271 -0.18352,36.65114 14.44549,36.65114 14.44548,0 15.12712,-20.13452 15.12712,-32.40403 0,-8.07477 -0.34082,-17.72257 -2.779,-25.3779 -2.09735,-6.65906 -6.26581,-9.25453 -12.19083,-9.25453" fill="currentColor" id="path16" />
+                    <path d="M 548.00762,105.45424 H 529.4461 c -1.86141,-0.13107 -3.35577,-1.62543 -3.35577,-3.46061 l -0.0262,-95.69149 c 0.1573,-1.75653 1.7041,-3.1198 3.59171,-3.1198 h 17.27691 c 1.62543,0.0786 2.96249,1.17976 3.32954,2.67412 v 14.62899 h 0.3408 c 5.21717,-13.0822 12.53165,-19.32181 25.40412,-19.32181 8.36317,0 16.51662,3.01494 21.75999,11.27324 4.87633,7.65532 4.87633,20.5278 4.87633,29.78233 v 60.22011 c -0.20973,1.67786 -1.75653,3.01492 -3.59169,3.01492 h -18.69262 c -1.70411,-0.13107 -3.11982,-1.38948 -3.30332,-3.01492 V 50.47753 c 0,-10.46052 1.20597,-25.77117 -11.66651,-25.77117 -4.5355,0 -8.70399,3.04117 -10.77512,7.65532 -2.62167,5.84637 -2.96249,11.66651 -2.96249,18.11585 v 51.5161 c -0.0262,1.91383 -1.65166,3.46061 -3.64414,3.46061" fill="currentColor" id="path18" />
+                    <use xlink:href="#path30" transform="translate(244.36719)" id="use28" />
+                    <path d="M 55.288261,59.75829 V 55.7209 c -13.475471,0 -27.711211,2.88385 -27.711211,18.77125 0,8.04857 4.16847,13.50169 11.32567,13.50169 5.24337,0 9.93618,-3.22467 12.8987,-8.46805 3.670341,-6.44935 3.486841,-12.50544 3.486841,-19.7675 m 18.79747,45.43378 c -1.23219,1.10111 -3.01495,1.17976 -4.40444,0.4457 -6.18716,-5.1385 -7.28828,-7.52423 -10.69647,-12.42678 -10.224571,10.4343 -17.460401,13.55409 -30.726141,13.55409 -15.67768,0 -27.89471,-9.67401 -27.89471,-29.04824 0,-15.12713 8.20587,-25.43035 19.87236,-30.46398 10.1197,-4.45688 24.25058,-5.24337 35.051931,-6.47556 v -2.41195 c 0,-4.43066 0.34082,-9.67403 -2.25465,-13.50167 -2.280881,-3.43442 -6.632861,-4.85013 -10.460531,-4.85013 -7.10475,0 -13.44924,3.64414 -14.99603,11.19459 -0.31461,1.67789 -1.5468,3.32955 -3.22467,3.4082 L 6.26276,32.67628 C 4.74218,32.33548 3.0643,31.10327 3.48377,28.76999 7.65225,6.85271 27.44596,0.24605 45.16856,0.24605 c 9.071011,0 20.921021,2.41195 28.078221,9.28076 9.07104,8.46804 8.20587,19.7675 8.20587,32.06321 v 29.04826 c 0,8.73022 3.61794,12.55786 7.02613,17.27691 1.20597,1.67786 1.46814,3.69656 -0.05244,4.95497 -3.80144,3.17225 -10.56538,9.07104 -14.28819,12.37436 l -0.05242,-0.0525" fill="currentColor" id="path30" />
+                </svg>
+            </div>
+
+            <p class="s2-lead">Across <span class="ph">200+</span> accounts audited, sellers recovered an average of</p>
+            <span class="s2-number"><span id="s2-counter">$0</span>+</span>
+            <p class="s2-trail">in the first <strong>90 days.</strong></p>
+            <p class="s2-support">That is what the audit finds. Before you spend a dollar.</p>
+
+            <!-- Brand Logos Grid -->
+            <div class="s2-logos-grid">
+                <div class="s2-logo-item">
+                    <span style="font-family:'Georgia', serif; font-weight: 900; font-style: italic; font-size: 23px; letter-spacing: -0.05em; text-transform: uppercase;">FORM</span>
+                </div>
+                <div class="s2-logo-item">
+                    <div class="brand-logo-flex">
+                        <svg viewBox="0 0 24 24" fill="currentColor" style="width:14px; height:14px; transform: rotate(-25deg);">
+                            <path d="M12 3c.132 0 .263 0 .393.007a7.5 7.5 0 0 0 7.92 12.446A9 9 0 1 1 12 2.99z" />
+                        </svg>
+                        <span style="font-family:'DM Sans', sans-serif; font-size:12px; font-weight:700; letter-spacing: 0.08em; text-transform: uppercase;">FLU SNOOZ</span>
+                    </div>
+                </div>
+                <div class="s2-logo-item">
+                    <span style="font-family:'Oswald', sans-serif; font-weight: 800; font-style: italic; font-size: 20px; letter-spacing: -0.01em;">MAESTRO</span>
+                </div>
+                <div class="s2-logo-item">
+                    <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative;">
+                        <svg viewBox="0 0 100 12" style="width: 80px; height: 10px;">
+                            <path d="M10 8 Q50 2, 90 8" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                        </svg>
+                        <span style="font-family:'Oswald', sans-serif; font-weight: 700; font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; margin: -2px 0;">SOLEGRIPZ</span>
+                        <svg viewBox="0 0 100 12" style="width: 80px; height: 10px;">
+                            <path d="M10 4 Q50 10, 90 4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                        </svg>
+                    </div>
+                </div>
+                <div class="s2-logo-item">
+                    <div style="display: flex; flex-direction: column; align-items: center; text-align: center; gap: 1px;">
+                        <span style="font-family:'Oswald', sans-serif; font-weight: 900; font-size: 17px; letter-spacing: 0.04em;">THIMTEC</span>
+                        <span style="font-family:'DM Sans', sans-serif; font-weight: 800; font-size: 7px; letter-spacing: 0.05em; text-transform: uppercase; opacity: 0.85;">THIMBLE TAPE</span>
+                    </div>
+                </div>
+                <div class="s2-logo-item">
+                    <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;">
+                        <svg viewBox="0 0 24 20" fill="none" stroke="currentColor" stroke-width="1.5" style="width: 22px; height: 18px;">
+                            <path d="M4 10a4 4 0 014-4h8a4 4 0 014 4c0 3-2 5-6 5H10c-4 0-6-2-6-5z" />
+                            <circle cx="7" cy="5" r="2.5" />
+                            <circle cx="17" cy="5" r="2.5" />
+                            <path d="M11 11h2c0.5 0 0.5 0.5 0 0.5h-2c-0.5 0-0.5-0.5 0-0.5z" fill="currentColor" />
+                        </svg>
+                        <span style="font-family:'Oswald', sans-serif; font-weight: 800; font-size: 11px; letter-spacing: 0.06em; line-height: 1; text-transform: uppercase;">BEAR BRUSH</span>
+                    </div>
+                </div>
+                <div class="s2-logo-item">
+                    <span style="font-family:'DM Sans', sans-serif; font-weight: 700; font-size: 21px; letter-spacing: -0.04em;">Luhxe</span>
+                </div>
+                <div class="s2-logo-item">
+                    <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width: 20px; height: 20px;">
+                            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                            <path d="M7 10h10" />
+                        </svg>
+                        <span style="font-family:'DM Sans', sans-serif; font-size: 8px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; line-height: 1;">CARDIOLOGY COFFEE</span>
+                    </div>
+                </div>
+                <div class="s2-logo-item">
+                    <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width: 20px; height: 20px;">
+                            <circle cx="12" cy="12" r="9" />
+                            <circle cx="12" cy="12" r="7" stroke-dasharray="2 1.5" />
+                            <path d="M9 12h6" />
+                        </svg>
+                        <span style="font-family:'Georgia', serif; font-style: italic; font-weight: 700; font-size: 13px; letter-spacing: -0.01em; line-height: 1;">My Rustic Roots</span>
+                    </div>
+                </div>
+                <div class="s2-logo-item">
+                    <span style="font-family:'Playfair Display', 'Georgia', serif; font-style: italic; font-weight: 700; font-size: 15px; letter-spacing: -0.01em;">Strawberry & Co</span>
+                </div>
+                <div class="s2-logo-item">
+                    <div style="display: flex; flex-direction: column; align-items: center; text-align: center; gap: 1px;">
+                        <span style="font-family:'Oswald', sans-serif; font-weight: 900; font-style: italic; font-size: 17px; letter-spacing: -0.02em;">BRUSHEE</span>
+                        <span style="font-family:'DM Sans', sans-serif; font-weight: 700; font-size: 7px; letter-spacing: 0.05em; text-transform: uppercase; opacity: 0.85;">on the go</span>
+                    </div>
+                </div>
+                <div class="s2-logo-item">
+                    <div class="brand-logo-flex" style="gap: 4px;">
+                        <span style="font-family:'DM Sans', sans-serif; font-weight: 800; font-size: 15px; letter-spacing: -0.03em;">eclipse</span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 14px; height: 14px;">
+                            <circle cx="12" cy="12" r="9" />
+                            <path d="M12 3a9 9 0 019 9 9 9 0 01-9 9" fill="currentColor" fill-opacity="0.35" stroke="none" />
+                        </svg>
+                        <span style="font-family:'DM Sans', sans-serif; font-weight: 300; font-size: 15px; letter-spacing: -0.03em;">optics</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- ══════════════════════════════════════════════════════════
+
+       SECTION 3 — TIMELINE NODES
+
+       Source: section-03-layout-explorations.html · Variant F
+
+  ══════════════════════════════════════════════════════════ -->
+
+    <section class="s3">
+
+        <div class="s3-inner">
+
+
+            <h2 class="s3-header">If You Skipped The Video, Here Is <span>What It Says.</span></h2>
+
+
+            <div class="s3-cards">
+
+                <!-- Card 1 -->
+                <div class="s3-card">
+                    <div class="s3-img">
+                        <svg viewBox="0 0 240 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <!-- PPC crescent (yellow to orange-yellow) -->
+                                <linearGradient id="ppcGrad" x1="120" y1="20" x2="120" y2="84" gradientUnits="userSpaceOnUse">
+                                    <stop offset="0%" stop-color="#FFE082"/>
+                                    <stop offset="100%" stop-color="#FFA726"/>
+                                </linearGradient>
+                                <!-- Listing crescent (orange-yellow to orange) -->
+                                <linearGradient id="listingGrad" x1="48" y1="92" x2="112" y2="92" gradientUnits="userSpaceOnUse">
+                                    <stop offset="0%" stop-color="#FFE082"/>
+                                    <stop offset="100%" stop-color="#F57C00"/>
+                                </linearGradient>
+                                <!-- Catalog crescent (orange to dark orange) -->
+                                <linearGradient id="catalogGrad" x1="128" y1="92" x2="192" y2="92" gradientUnits="userSpaceOnUse">
+                                    <stop offset="0%" stop-color="#F57C00"/>
+                                    <stop offset="100%" stop-color="#D84315"/>
+                                </linearGradient>
+                                <!-- Unified Data center circle -->
+                                <linearGradient id="unifiedGrad" x1="120" y1="74" x2="120" y2="110" gradientUnits="userSpaceOnUse">
+                                    <stop offset="0%" stop-color="#D84315"/>
+                                    <stop offset="100%" stop-color="#BF360C"/>
+                                </linearGradient>
+                            </defs>
+
+                            <!-- PPC Crescent -->
+                            <path d="M 97.37 74.63 A 32 32 0 1 1 142.63 74.63 L 132.73 64.73 A 18 18 0 1 0 107.27 64.73 Z" fill="url(#ppcGrad)" stroke="#FFF8EB" stroke-width="1.5"/>
+
+                            <!-- LISTING Crescent -->
+                            <path d="M 102.63 114.63 A 32 32 0 1 1 102.63 69.37 L 92.73 79.27 A 18 18 0 1 0 92.73 104.73 Z" fill="url(#listingGrad)" stroke="#FFF8EB" stroke-width="1.5"/>
+
+                            <!-- CATALOG Crescent -->
+                            <path d="M 137.37 69.37 A 32 32 0 1 1 137.37 114.63 L 147.27 104.73 A 18 18 0 1 0 147.27 79.27 Z" fill="url(#catalogGrad)" stroke="#FFF8EB" stroke-width="1.5"/>
+
+                            <!-- UNIFIED DATA Center Circle -->
+                            <circle cx="120" cy="92" r="18" fill="url(#unifiedGrad)"/>
+
+                            <!-- Labels -->
+                            <text x="120" y="56" fill="#7F4D00" font-family="'DM Sans', sans-serif" font-size="9" font-weight="800" letter-spacing="0.04em" text-anchor="middle">PPC</text>
+                            <text x="36" y="96" fill="#D07000" font-family="'DM Sans', sans-serif" font-size="10" font-weight="800" letter-spacing="0.04em" text-anchor="middle">LISTING</text>
+                            <text x="204" y="96" fill="#D07000" font-family="'DM Sans', sans-serif" font-size="10" font-weight="800" letter-spacing="0.04em" text-anchor="middle">CATALOG</text>
+
+                            <!-- Arrow from PPC down -->
+                            <line x1="120" y1="58" x2="120" y2="74" stroke="#D07000" stroke-width="2.5" stroke-linecap="round"/>
+                            <path d="M116.5 70.5 L120 74 L123.5 70.5" stroke="#D07000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+
+                            <!-- Arrow from LISTING right/down/right (elbow connector) -->
+                            <path d="M 92 92 H 102 V 102 H 108" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                            <path d="M 104 98.5 L 108 102 L 104 105.5" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+
+                            <!-- Arrow from CATALOG left/down/left (elbow connector) -->
+                            <path d="M 148 92 H 138 V 102 H 132" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                            <path d="M 136 98.5 L 132 102 L 136 105.5" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+
+                            <!-- Center text -->
+                            <text x="120" y="89" fill="#FFFFFF" font-family="'DM Sans', sans-serif" font-size="8" font-weight="800" letter-spacing="0.04em" text-anchor="middle">UNIFIED</text>
+                            <text x="120" y="99" fill="#FFFFFF" font-family="'DM Sans', sans-serif" font-size="8" font-weight="800" letter-spacing="0.04em" text-anchor="middle">DATA</text>
+                        </svg>
+                    </div>
+                    <h3 class="s3-card-title">Not the product. The system.</h3>
+                    <p class="s3-p">Most sellers spending too much on ads are not losing because of a bad product. They
+                        are losing because their advertising, listings, and catalog have stopped working as one system.
+                        The longer it goes unfixed, the worse it gets.</p>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="s3-card">
+                    <div class="s3-img">
+                        <svg viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <linearGradient id="acosGrad" x1="90" y1="18" x2="90" y2="90" gradientUnits="userSpaceOnUse">
+                                    <stop offset="0%" stop-color="#FFE082"/>
+                                    <stop offset="100%" stop-color="#FFD54F"/>
+                                </linearGradient>
+                                <linearGradient id="cvrGrad" x1="90" y1="18" x2="152" y2="126" gradientUnits="userSpaceOnUse">
+                                    <stop offset="0%" stop-color="#FFA726"/>
+                                    <stop offset="100%" stop-color="#FB8C00"/>
+                                </linearGradient>
+                                <linearGradient id="bsrGrad" x1="90" y1="90" x2="27" y2="126" gradientUnits="userSpaceOnUse">
+                                    <stop offset="0%" stop-color="#FF7043"/>
+                                    <stop offset="100%" stop-color="#D84315"/>
+                                </linearGradient>
+                            </defs>
+
+                            <!-- Slices meeting perfectly at center (3x 120-degree wedges) -->
+                            <path d="M 90 90 L 27.65 126.00 A 72 72 0 0 1 90.00 18.00 Z" fill="url(#acosGrad)" stroke="#FFF8EB" stroke-width="2"/>
+                            <path d="M 90 90 L 90.00 18.00 A 72 72 0 0 1 152.35 126.00 Z" fill="url(#cvrGrad)" stroke="#FFF8EB" stroke-width="2"/>
+                            <path d="M 90 90 L 152.35 126.00 A 72 72 0 0 1 27.65 126.00 Z" fill="url(#bsrGrad)" stroke="#FFF8EB" stroke-width="2"/>
+
+                            <!-- Center circle -->
+                            <circle cx="90" cy="90" r="28" fill="#FFFFFF" stroke="#E8800A" stroke-width="1.5"/>
+
+                            <!-- Labels inside wedges -->
+                            <text x="52" y="66" fill="#7F4D00" font-family="'DM Sans', sans-serif" font-size="10" font-weight="800" letter-spacing="0.03em" text-anchor="middle">ACOS</text>
+                            <text x="128" y="66" fill="#E65100" font-family="'DM Sans', sans-serif" font-size="10" font-weight="800" letter-spacing="0.03em" text-anchor="middle">CVR</text>
+                            <text x="90" y="142" fill="#FFFFFF" font-family="'DM Sans', sans-serif" font-size="10" font-weight="800" letter-spacing="0.03em" text-anchor="middle">BSR</text>
+
+                            <!-- Center text -->
+                            <text x="90" y="87" fill="#E8800A" font-family="'DM Sans', sans-serif" font-size="8" font-weight="800" letter-spacing="0.02em" text-anchor="middle">ONE</text>
+                            <text x="90" y="97" fill="#E8800A" font-family="'DM Sans', sans-serif" font-size="8" font-weight="800" letter-spacing="0.02em" text-anchor="middle">SYSTEM</text>
+                        </svg>
+                    </div>
+                    <h3 class="s3-card-title">Structural problem. Structural fix.</h3>
+                    <p class="s3-p">It is a structural problem across the whole account — and it has a structural fix.
+                        Not adjusting one thing in isolation. Rebuilding the connection between all three so they work
+                        together.</p>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="s3-card">
+                    <div class="s3-img">
+                        <svg viewBox="0 0 200 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <linearGradient id="leak1Grad" x1="100" y1="60" x2="52" y2="142" gradientUnits="userSpaceOnUse">
+                                    <stop offset="0%" stop-color="#FFA726"/>
+                                    <stop offset="100%" stop-color="#FB8C00"/>
+                                </linearGradient>
+                                <linearGradient id="leak2Grad" x1="100" y1="60" x2="100" y2="154" gradientUnits="userSpaceOnUse">
+                                    <stop offset="0%" stop-color="#FFE082"/>
+                                    <stop offset="100%" stop-color="#FFCA28"/>
+                                </linearGradient>
+                                <linearGradient id="leak3Grad" x1="100" y1="60" x2="147" y2="142" gradientUnits="userSpaceOnUse">
+                                    <stop offset="0%" stop-color="#FF7043"/>
+                                    <stop offset="100%" stop-color="#D84315"/>
+                                </linearGradient>
+                            </defs>
+
+                            <!-- Three Leak wedges radiating from center (100, 60) -->
+                            <path d="M 100 60 L 86.78 154.08 A 95 95 0 0 1 52.50 142.27 Z" fill="url(#leak1Grad)" stroke="#FFF8EB" stroke-width="2.5"/>
+                            <path d="M 100 60 L 109.93 154.48 A 95 95 0 0 1 90.07 154.48 Z" fill="url(#leak2Grad)" stroke="#FFF8EB" stroke-width="2.5"/>
+                            <path d="M 100 60 L 147.50 142.27 A 95 95 0 0 1 113.22 154.08 Z" fill="url(#leak3Grad)" stroke="#FFF8EB" stroke-width="2.5"/>
+
+                            <!-- Dome (centered at 100, 60 with radius 52) drawn ON TOP of wedges to mask them -->
+                            <!-- Left half of dome -->
+                            <path d="M 100 8 A 52 52 0 0 0 100 112 Z" fill="#FFA726"/>
+                            <!-- Right half of dome -->
+                            <path d="M 100 8 A 52 52 0 0 1 100 112 Z" fill="#D84315"/>
+
+                            <!-- Labels -->
+                            <text x="55" y="166" fill="#C07020" font-family="'DM Sans', sans-serif" font-size="9" font-weight="800" letter-spacing="0.05em" text-anchor="middle">LEAK 1</text>
+                            <text x="100" y="172" fill="#C07020" font-family="'DM Sans', sans-serif" font-size="9" font-weight="800" letter-spacing="0.05em" text-anchor="middle">LEAK 2</text>
+                            <text x="145" y="166" fill="#C07020" font-family="'DM Sans', sans-serif" font-size="9" font-weight="800" letter-spacing="0.05em" text-anchor="middle">LEAK 3</text>
+                        </svg>
+                    </div>
+                    <h3 class="s3-card-title">See the cost before you commit.</h3>
+                    <p class="s3-p">Before you commit to anything, we show you exactly what is broken and what fixing it
+                        is worth. The audit takes 48 hours, costs nothing, and gives you a dollar-value estimate of what
+                        each problem is costing you every month.</p>
+                </div>
+
+            </div>
+
+
+            </div>
+
+            <!-- Centered Button below cards -->
+            <div style="display: flex; justify-content: center; margin-top: 40px;">
+                <a href="#book-audit" class="s1-cta" style="margin: 0;">
+                    Book Your Free Amazon Audit
+                    <svg viewBox="0 0 18 18">
+                        <path d="M3 9h12M10 4l5 5-5 5" />
+                    </svg>
+                </a>
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ══════════════════════════════════════════════════════════
+
+       SECTION 4 — QUOTE-FORWARD
+
+       Source: section-04-layout-explorations-v2.html · Variant B
+
+  ══════════════════════════════════════════════════════════ -->
+
+    <section class="s4">
+        <div class="s4-inner">
+            <!-- Left Column: Portrait & Badges -->
+            <div class="s4-founder-col">
+                <div class="s4-founder-photo">
+                    <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?fit=crop&w=400&h=500&q=80"
+                        alt="Founder of AMZexpand">
+                </div>
+                <div class="s4-badge">Founder, AMZexpand</div>
+                <div class="s4-badge">500+ Millions Generated</div>
+            </div>
+
+            <!-- Right Column: Quote Text -->
+            <div class="s4-text-col">
+                <h2 class="s4-pullquote">
+                    I Built AMZexpand To Give Other Sellers The System I Had To Figure Out <span>The Hard Way.</span>
+                </h2>
+                <div class="s4-body">
+                    <p class="s4-p">I did not read about Amazon and build an agency around it. I built <span
+                            class="s4-highlight">Brushee from zero to multi-million dollars</span> on Amazon myself. I
+                        ran the advertising. I fixed the listings. I watched ranking move when the system worked and
+                        stagnate when it did not.</p>
+                    <p class="s4-p">When you work with us you are not getting a team that manages ads in isolation. You
+                        are getting operators who have built and run accounts from the inside — who know what broken
+                        looks like because they have fixed hundreds of them.</p>
+                    <p class="s4-p">That is why we back every engagement with a 90-day performance guarantee. Not
+                        because it sounds good. Because we already know what we are going to find in your account.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- ══════════════════════════════════════════════════════════
+
+       SECTION 5 — 2×2 DATA CARDS
+
+       Source: section-05-layout-explorations.html · Variant A
+
+  ══════════════════════════════════════════════════════════ -->
+
+    <section class="s5">
+        <div class="s5-inner">
+            <div class="s5-intro">
+                <h2 class="s5-header">What Changes When The <span>System Works</span></h2>
+                <p class="s5-sub">These are accounts we audited, fixed, and handed back to sellers who now know exactly
+                    what their account is doing every week.</p>
+            </div>
+
+            <!-- Slider Viewport -->
+            <div class="s5-slider-viewport">
+                <div class="s5-slider-track" id="s5-track">
+                    <!-- Chat Card 1 (Jasmine L.) -->
+                    <div class="s5-chat-card slate-theme">
+                        <div class="s5-chat-history">
+                            <div class="client-bubble-wrap">
+                                <span class="chat-sender-label client-label">Jasmine L</span>
+                                <div class="client-bubble">
+                                    Hey! Just wanted to say—our PPC sales have doubled this month. I honestly didn't
+                                    expect results this fast!
+                                </div>
+                            </div>
+                            <div class="team-bubble-wrap">
+                                <span class="chat-sender-label team-label">AMZ EXPAND TEAM</span>
+                                <div class="team-bubble">
+                                    We love to hear that, Jasmine! Your brand has huge potential—glad we could help
+                                    unlock it early. Let's keep the momentum going
+                                </div>
+                            </div>
+                        </div>
+                        <div class="s5-chat-footer">
+                            <img class="s5-client-avatar"
+                                src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?fit=crop&w=100&h=100&q=80"
+                                alt="Jasmine L">
+                            <span class="s5-client-name">Jasmine L.</span>
+                        </div>
+                    </div>
+
+                    <!-- Chat Card 2 (Marcus T.) -->
+                    <div class="s5-chat-card cream-theme">
+                        <div class="s5-chat-history">
+                            <div class="client-bubble-wrap">
+                                <span class="chat-sender-label client-label">Marcus T</span>
+                                <div class="client-bubble">
+                                    I really appreciate how hands-on you guys are. This is the first time I've felt like
+                                    someone actually understands my business
+                                </div>
+                            </div>
+                            <div class="team-bubble-wrap">
+                                <span class="chat-sender-label team-label">AMZ EXPAND TEAM</span>
+                                <div class="team-bubble">
+                                    Thanks, Marcus—your wins are our wins. We're in your corner every step of the way!
+                                    😊
+                                </div>
+                            </div>
+                        </div>
+                        <div class="s5-chat-footer">
+                            <img class="s5-client-avatar"
+                                src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?fit=crop&w=100&h=100&q=80"
+                                alt="Marcus T">
+                            <span class="s5-client-name">Marcus T.</span>
+                        </div>
+                    </div>
+
+                    <!-- Chat Card 3 (Reena P.) -->
+                    <div class="s5-chat-card slate-theme">
+                        <div class="s5-chat-history">
+                            <div class="client-bubble-wrap">
+                                <span class="chat-sender-label client-label">Reena P</span>
+                                <div class="client-bubble">
+                                    Wait, are you telling me we're finally profitable on ads?? I could cry LOL. You guys
+                                    are unreal!
+                                </div>
+                            </div>
+                            <div class="team-bubble-wrap">
+                                <span class="chat-sender-label team-label">AMZ EXPAND TEAM</span>
+                                <div class="team-bubble">
+                                    Happy tears are the best kind! Yes—you're profitable and scaling. Let's level up
+                                    even more!
+                                </div>
+                            </div>
+                        </div>
+                        <div class="s5-chat-footer">
+                            <img class="s5-client-avatar"
+                                src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?fit=crop&w=100&h=100&q=80"
+                                alt="Reena P">
+                            <span class="s5-client-name">Reena P.</span>
+                        </div>
+                    </div>
+
+                    <!-- Chat Card 4 (Daniel K.) -->
+                    <div class="s5-chat-card cream-theme">
+                        <div class="s5-chat-history">
+                            <div class="client-bubble-wrap">
+                                <span class="chat-sender-label client-label">Daniel K</span>
+                                <div class="client-bubble">
+                                    Honestly, the best decision we made this year. We were skeptical about the audit but the insights were so clear we had to sign up. 10/10 recommend.
+                                </div>
+                            </div>
+                            <div class="team-bubble-wrap">
+                                <span class="chat-sender-label team-label">AMZ EXPAND TEAM</span>
+                                <div class="team-bubble">
+                                    Daniel, your team has been a blast to work with. Let's keep hitting those revenue goals!
+                                </div>
+                            </div>
+                        </div>
+                        <div class="s5-chat-footer">
+                            <img class="s5-client-avatar"
+                                src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?fit=crop&w=100&h=100&q=80"
+                                alt="Daniel K">
+                            <span class="s5-client-name">Daniel K.</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Controls Row -->
+            <div class="s5-controls-row">
+                <div class="s5-dots" id="s5-dots">
+                    <span class="s5-dot active" data-index="0"></span>
+                    <span class="s5-dot" data-index="1"></span>
+                    <span class="s5-dot" data-index="2"></span>
+                </div>
+                <div class="s5-arrows">
+                    <div class="s5-arrow" id="s5-prev" aria-label="Previous slide">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M15 18l-6-6 6-6" />
+                        </svg>
+                    </div>
+                    <div class="s5-arrow" id="s5-next" aria-label="Next slide">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M9 18l6-6-6-6" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- ══════════════════════════════════════════════════════
+
+       SECTION 6 · Performance Guarantee (Variant A · Dark Statement)
+
+       ══════════════════════════════════════════════════════ -->
+
+    <section class="s6-section">
+        <!-- Concentric waves bg pattern matching Figma -->
+        <svg class="s6-bg-waves" style="position: absolute; right: 0; top: 0; height: 100%; width: auto; pointer-events: none; opacity: 0.15; z-index: 1;" viewBox="0 0 500 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="500" cy="300" r="180" stroke="white" stroke-width="24" />
+            <circle cx="500" cy="300" r="300" stroke="white" stroke-width="32" />
+            <circle cx="500" cy="300" r="440" stroke="white" stroke-width="40" />
+            <circle cx="500" cy="300" r="580" stroke="white" stroke-width="48" />
+        </svg>
+        <div class="s6-inner">
+            <div class="s6-numeral-col">
+                <span class="s6-big-num">90</span>
+                <span class="s6-num-label">Day Guarantee</span>
+                <a href="#book-audit" class="s6-cta-button">Book Free Audit</a>
+            </div>
+
+            <div class="s6-content">
+                <h2 class="s6-header">We Do Not Win Unless You Do</h2>
+                <div class="s6-body">
+                    <p class="s6-p">Every engagement runs under a 90-day performance guarantee. We agree on the metrics
+                        before we touch anything. If we do not move them within 90 days, we keep working until we do.
+                        For free. <strong>No fine print. No renegotiation.</strong></p>
+                    <p class="s6-p">We offer this because we already know what we are going to find in your account. The
+                        guarantee is not a sales tactic. It is the logical consequence of knowing the system well enough
+                        to fix it.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- ══════════════════════════════════════════════════════
+
+       SECTION 7 · Objection Handling (Variant F · FAQ Accordion)
+
+       ══════════════════════════════════════════════════════ -->
+
+    <section class="s7-section">
+
+        <div class="s7-inner">
+
+
+            <div class="s7-header">
+
+                <span class="s7-eyebrow">
+
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+
+                        <circle cx="6" cy="6" r="5.25" stroke="currentColor" stroke-width="1.25" />
+
+                        <path
+                            d="M5.25 4.75C5.25 4.06 5.76 3.5 6.5 3.5S7.75 4.06 7.75 4.75c0 .52-.36.9-.72 1.12C6.64 6.18 6.25 6.5 6.25 7v.25h1.5V7c0-.22.22-.45.53-.65C8.74 5.97 9.25 5.43 9.25 4.75c0-1.24-1.01-2.25-2.75-2.25S3.75 3.51 3.75 4.75h1.5zm-.5 4.5h1.5v1.5h-1.5v-1.5z"
+                            fill="currentColor" />
+
+                    </svg>
+
+                    Common Questions
+
+                </span>
+
+                <h2 class="s7-title">Before You <span>Book</span></h2>
+
+                <p class="s7-sub">Most sellers who book the audit come in carrying one of three concerns. Here is what
+                    happens to each of them.</p>
+
+            </div>
+
+
+            <div class="s7-faq">
+
+
+                <div class="s7-item">
+
+                    <button class="s7-trigger" id="s7-trigger-1" aria-expanded="false" aria-controls="s7-panel-1">
+
+                        <span class="s7-num-badge" aria-hidden="true">1</span>
+
+                        <span class="s7-question">I have tried agencies before and it did not work.</span>
+
+                        <span class="s7-chevron" aria-hidden="true">
+
+                            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"
+                                focusable="false">
+
+                                <path d="M2 6h8M6 2v8" stroke="currentColor" stroke-width="1.6"
+                                    stroke-linecap="round" />
+
+                            </svg>
+
+                        </span>
+
+                    </button>
+
+                    <div class="s7-panel" id="s7-panel-1" role="region" aria-labelledby="s7-trigger-1">
+
+                        <div class="s7-panel-inner">
+
+                            <p class="s7-response">We hear this on almost every first call. Most agencies are built
+                                around the appearance of work — busy dashboards, weekly reports, vague answers. The
+                                audit is how we prove we are different before you spend a dollar. You see exactly what
+                                is broken, what fixing it is worth, and how we approach it. You do not have to take our
+                                word for it. The audit shows you.</p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="s7-item">
+
+                    <button class="s7-trigger" id="s7-trigger-2" aria-expanded="false" aria-controls="s7-panel-2">
+
+                        <span class="s7-num-badge" aria-hidden="true">2</span>
+
+                        <span class="s7-question">I do not want to be locked into a contract.</span>
+
+                        <span class="s7-chevron" aria-hidden="true">
+
+                            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"
+                                focusable="false">
+
+                                <path d="M2 6h8M6 2v8" stroke="currentColor" stroke-width="1.6"
+                                    stroke-linecap="round" />
+
+                            </svg>
+
+                        </span>
+
+                    </button>
+
+                    <div class="s7-panel" id="s7-panel-2" role="region" aria-labelledby="s7-trigger-2">
+
+                        <div class="s7-panel-inner">
+
+                            <p class="s7-response">The audit has no commitment attached. If you move forward, the terms
+                                are straightforward — no lock-ins structured to make leaving painful. We keep clients
+                                because the account moves, not because the contract makes leaving difficult.</p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="s7-item">
+
+                    <button class="s7-trigger" id="s7-trigger-3" aria-expanded="false" aria-controls="s7-panel-3">
+
+                        <span class="s7-num-badge" aria-hidden="true">3</span>
+
+                        <span class="s7-question">I do not have the time to onboard a new agency.</span>
+
+                        <span class="s7-chevron" aria-hidden="true">
+
+                            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"
+                                focusable="false">
+
+                                <path d="M2 6h8M6 2v8" stroke="currentColor" stroke-width="1.6"
+                                    stroke-linecap="round" />
+
+                            </svg>
+
+                        </span>
+
+                    </button>
+
+                    <div class="s7-panel" id="s7-panel-3" role="region" aria-labelledby="s7-trigger-3">
+
+                        <div class="s7-panel-inner">
+
+                            <p class="s7-response">The audit takes 48 hours on our side. Your involvement is one
+                                conversation. After that we work inside the account — you do not manage us. Every Monday
+                                you get one page showing what changed and why. That is the only time it asks from you.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+            <!-- Centered Button below accordion -->
+            <div style="display: flex; justify-content: center; margin-top: 48px;">
+                <a href="#book-audit" class="s1-cta" style="margin: 0;">
+                    Book Your Free Amazon Audit
+                    <svg viewBox="0 0 18 18">
+                        <path d="M3 9h12M10 4l5 5-5 5" />
+                    </svg>
+                </a>
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ══════════════════════════════════════════════════════
+
+       SECTION 8 · Guarantee Restatement + Scarcity (Variant A · Dark Metrics)
+
+       ══════════════════════════════════════════════════════ -->
+
+    <section class="s8-section">
+
+        <div class="s8-inner">
+
+
+            <h2 class="s8-header">Measurable Results. Or We <span class="accent">Keep Working Free.</span></h2>
+
+            <p class="s8-sub" style="text-align: center; max-width: 600px; margin: -16px auto 40px; font-size: 15px; line-height: 1.6; color: var(--on-surface-variant); font-family: 'DM Sans', sans-serif;">Most sellers who book the audit come in carrying one of three concerns.<br>Here is what happens to each of them.</p>
+
+            <div class="s8-metrics">
+
+                <div class="s8-metric">
+                    <div class="s8-metric-top">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#E8800A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 12px; flex-shrink: 0;">
+                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                            <line x1="16" y1="2" x2="16" y2="6"/>
+                            <line x1="8" y1="2" x2="8" y2="6"/>
+                            <line x1="3" y1="10" x2="21" y2="10"/>
+                        </svg>
+                        <p class="s8-metric-num">90</p>
+                    </div>
+                    <p class="s8-metric-label">Day performance<br>window</p>
+                </div>
+
+                <div class="s8-metric">
+                    <div class="s8-metric-top">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#E8800A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 12px; flex-shrink: 0;">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                            <circle cx="12" cy="7" r="4"/>
+                        </svg>
+                        <p class="s8-metric-num">3</p>
+                    </div>
+                    <p class="s8-metric-label">New accounts taken<br>per month</p>
+                </div>
+
+                <div class="s8-metric">
+                    <div class="s8-metric-top">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#E8800A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 12px; flex-shrink: 0;">
+                            <line x1="12" y1="1" x2="12" y2="23"/>
+                            <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                        </svg>
+                        <p class="s8-metric-num">0</p>
+                    </div>
+                    <p class="s8-metric-label">Cost if we don't<br>hit the targets</p>
+                </div>
+
+            </div>
+
+
+            <div class="s8-copy">
+
+                <span class="s8-eyebrow">The Guarantee</span>
+
+                <p class="s8-p" style="margin-bottom: 32px;">We fix the system or we keep working until we do. No
+                    conditions. No exceptions. If your metrics have not moved in 90 days, we continue at no cost until
+                    they do.</p>
+
+                <span class="s8-eyebrow">The Commitment</span>
+
+                <p class="s8-p">We take three new accounts per month. Not as a tactic — because that is the number we
+                    can take on without quality slipping for anyone already inside.</p>
+
+            </div>
+
+            <!-- Centered Button below copy -->
+            <div style="display: flex; justify-content: center; margin-top: 48px;">
+                <a href="#book-audit" class="s1-cta" style="margin: 0;">
+                    Book Your Free Amazon Audit
+                    <svg viewBox="0 0 18 18">
+                        <path d="M3 9h12M10 4l5 5-5 5" />
+                    </svg>
+                </a>
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ══════════════════════════════════════════════════════
+
+       SECTION 9 · Final CTA (Variant A · Dark Centered)
+
+       ══════════════════════════════════════════════════════ -->
+
+    <section class="s9-section">
+
+        <div class="s9-inner">
+
+
+            <h2 class="s9-header">SEE WHAT IS ACTUALLY <span>COSTING YOU</span></h2>
+
+
+            <div class="s9-body">
+
+                <p class="s9-p">The audit covers wasted ad spend, listings that are not converting, ranking gaps, and
+                    catalog issues. For each one you get a dollar-value estimate of what it is costing you every month.
+                    Most accounts have at least two or three running at the same time.</p>
+
+                <p class="s9-p">48 hours. No cost. No commitment. A complete picture of your account before you decide
+                    anything.</p>
+
+            </div>
+
+
+            <div class="s9-cta-zone">
+
+                <a href="#book-audit" class="s9-btn">Book Your Free Audit &rarr;</a>
+
+                <p class="s9-reassurance">Two minutes to book. No card. No obligation.</p>
+
+            </div>
+
+
+            <div class="s9-expand-wrap">
+
+                <button class="s9-expand-trigger" aria-expanded="false">
+
+                    Want to see exactly what the audit covers before you book?
+
+                    <svg class="chevron" width="16" height="16" viewBox="0 0 16 16" fill="none">
+
+                        <path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                            stroke-linejoin="round" />
+
+                    </svg>
+
+                </button>
+
+            </div>
+
+
+            <div class="s9-panel" role="region">
+
+                <div class="s9-panel-inner">
+
+                    <div class="s9-items">
+
+
+                        <div class="s9-item">
+
+                            <p class="s9-item-text"><span class="item-lbl">Your ad spend</span> — where it is going,
+                                what it is returning, and where it is being wasted.</p>
+
+                        </div>
+
+
+                        <div class="s9-item">
+
+                            <p class="s9-item-text"><span class="item-lbl">Your listings</span> — whether they are
+                                converting the traffic your ads are buying and what is causing them to lose sales.</p>
+
+                        </div>
+
+
+                        <div class="s9-item">
+
+                            <p class="s9-item-text"><span class="item-lbl">Your ranking</span> — where your products sit
+                                organically and what is stopping them from moving.</p>
+
+                        </div>
+
+
+                        <div class="s9-item">
+
+                            <p class="s9-item-text"><span class="item-lbl">Your catalog</span> — whether the account
+                                structure is supporting your growth or working against it.</p>
+
+                        </div>
+
+
+                    </div>
+
+
+                    <p class="s9-panel-close">Each area comes with a plain-English summary and a dollar-value estimate.
+                        48 hours. No cost. No obligation.</p>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+    <!-- ══ FOOTER ══ -->
+
+    <footer class="ftr">
+
+        <div class="ftr-inner">
+
+
+            <div class="ftr-top">
+
+                <div class="ftr-brand">
+
+                    <a href="#" class="ftr-wordmark" style="display: block; text-decoration: none; color: #FFFFFF;">
+                        <svg viewBox="0 0 160 36" fill="none" xmlns="http://www.w3.org/2000/svg"
+                            style="height: 28px; display: block;">
+                            <path d="M12 26L20 8L28 26" stroke="currentColor" stroke-width="4.5" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                            <path d="M34 26V8L42 18L50 8V26" stroke="currentColor" stroke-width="4.5" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                            <path d="M56 8H70L56 26H70" stroke="#E8800A" stroke-width="4.5" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                            <circle cx="74" cy="25" r="2.5" fill="#E8800A" />
+                            <text x="84" y="22" fill="currentColor" font-family="'DM Sans', sans-serif" font-size="14"
+                                font-weight="700" letter-spacing="0.1em">EXPAND</text>
+                        </svg>
+                    </a>
+
+                    <span class="ftr-closing" style="margin-top: 12px; display: block;">Built by Amazon sellers. Run for Amazon sellers.</span>
+
+                </div>
+
+                <nav class="ftr-links">
+
+                    <a href="#" class="ftr-link">Privacy Policy</a>
+
+                    <a href="#" class="ftr-link">Terms of Service</a>
+
+                </nav>
+
+            </div>
+
+
+            <p class="ftr-compliance">© 2025 AMZ Expand. All rights reserved.</p>
+
+            <p class="ftr-compliance" style="margin-top:8px;">Results shown reflect individual client accounts. Outcomes
+                vary based on account history, product category, and market conditions.</p>
+
+
+        </div>
+
+    </footer>
+
+
+    <script>
+
+        /* ── Play button keyboard support ── */
+
+        (function () {
+
+            var playBtn = document.querySelector('.s1-play-btn');
+
+            if (!playBtn) return;
+
+            playBtn.addEventListener('keydown', function (e) {
+
+                if (e.key === 'Enter' || e.key === ' ') {
+
+                    e.preventDefault();
+
+                    playBtn.click();
+
+                }
+
+            });
+
+        })();
+
+
+        /* ── Header scroll ── */
+
+        (function () {
+
+            var header = document.getElementById('site-header');
+
+            window.addEventListener('scroll', function () {
+
+                if (window.scrollY > 40) {
+
+                    header.classList.add('scrolled');
+
+                } else {
+
+                    header.classList.remove('scrolled');
+
+                }
+
+            }, { passive: true });
+
+        })();
+
+
+        /* ── Testimonials slider ── */
+
+        (function () {
+
+            var track = document.getElementById('s5-track');
+            var dotsContainer = document.getElementById('s5-dots');
+            var prevBtn = document.getElementById('s5-prev');
+            var nextBtn = document.getElementById('s5-next');
+
+            if (!track || !prevBtn || !nextBtn || !dotsContainer) return;
+
+            var currentIndex = 0;
+
+            function getSliderParams() {
+                var isMobile = window.innerWidth <= 991;
+                var cards = track.querySelectorAll('.s5-chat-card');
+                var totalCards = cards.length;
+                var visibleCards = isMobile ? 1 : 3;
+                var gap = isMobile ? 20 : 24;
+                var maxIndex = totalCards - visibleCards;
+                return {
+                    isMobile: isMobile,
+                    cards: cards,
+                    totalCards: totalCards,
+                    visibleCards: visibleCards,
+                    gap: gap,
+                    maxIndex: maxIndex
+                };
+            }
+
+            function updateSlider() {
+                var params = getSliderParams();
+                var viewportWidth = track.parentElement.offsetWidth;
+                var cardWidth = (viewportWidth - (params.visibleCards - 1) * params.gap) / params.visibleCards;
+
+                params.cards.forEach(function (card) {
+                    card.style.width = cardWidth + 'px';
+                });
+
+                if (currentIndex > params.maxIndex) {
+                    currentIndex = params.maxIndex;
+                }
+                if (currentIndex < 0) {
+                    currentIndex = 0;
+                }
+
+                var offset = -currentIndex * (cardWidth + params.gap);
+                track.style.transform = 'translateX(' + offset + 'px)';
+
+                // Re-build/update dots
+                dotsContainer.innerHTML = '';
+                for (var i = 0; i <= params.maxIndex; i++) {
+                    var dot = document.createElement('span');
+                    dot.className = 's5-dot' + (i === currentIndex ? ' active' : '');
+                    dot.setAttribute('data-index', i);
+                    dot.addEventListener('click', function (e) {
+                        currentIndex = parseInt(e.target.getAttribute('data-index'), 10);
+                        updateSlider();
+                    });
+                    dotsContainer.appendChild(dot);
+                }
+            }
+
+            function nextSlide() {
+                var params = getSliderParams();
+                if (currentIndex >= params.maxIndex) {
+                    currentIndex = 0;
+                } else {
+                    currentIndex++;
+                }
+                updateSlider();
+            }
+
+            function prevSlide() {
+                var params = getSliderParams();
+                if (currentIndex <= 0) {
+                    currentIndex = params.maxIndex;
+                } else {
+                    currentIndex--;
+                }
+                updateSlider();
+            }
+
+            nextBtn.addEventListener('click', nextSlide);
+            prevBtn.addEventListener('click', prevSlide);
+
+            window.addEventListener('resize', updateSlider);
+            
+            // Initial call
+            updateSlider();
+
+        })();
+
+
+        /* ── Section 7 accordion ── */
+
+        (function () {
+
+            var triggers = document.querySelectorAll('.s7-trigger');
+
+
+            triggers.forEach(function (trigger) {
+
+                trigger.addEventListener('click', function () {
+
+                    var item = trigger.closest('.s7-item');
+
+                    var panel = item.querySelector('.s7-panel');
+
+                    var isOpen = trigger.classList.contains('is-open');
+
+
+                    triggers.forEach(function (t) {
+
+                        t.classList.remove('is-open');
+
+                        t.setAttribute('aria-expanded', 'false');
+
+                        t.closest('.s7-item').querySelector('.s7-panel').classList.remove('is-open');
+
+                    });
+
+
+                    if (!isOpen) {
+
+                        trigger.classList.add('is-open');
+
+                        trigger.setAttribute('aria-expanded', 'true');
+
+                        panel.classList.add('is-open');
+
+                    }
+
+                });
+
+            });
+
+
+            triggers[0].click();
+
+        })();
+
+
+        /* ── Section 2 ticker ── */
+
+        (function () {
+
+            var counter = document.getElementById('s2-counter');
+
+            if (!counter) return;
+
+
+            var target = 50000;
+
+            var duration = 2200;
+
+            var started = false;
+
+
+            function easeOutCubic(t) { return 1 - Math.pow(1 - t, 3); }
+
+
+            function fmt(n) {
+
+                var s = '' + Math.floor(n);
+
+                var r = '';
+
+                for (var i = 0; i < s.length; i++) {
+
+                    if (i > 0 && (s.length - i) % 3 === 0) r += ',';
+
+                    r += s[i];
+
+                }
+
+                return '$' + r;
+
+            }
+
+
+            function run(startTs) {
+
+                function tick(ts) {
+
+                    var progress = Math.min((ts - startTs) / duration, 1);
+
+                    counter.textContent = fmt(target * easeOutCubic(progress));
+
+                    if (progress < 1) requestAnimationFrame(tick);
+
+                }
+
+                tick(startTs); // render $0 immediately, then RAF drives the rest
+
+            }
+
+
+            var obs = new IntersectionObserver(function (entries) {
+
+                if (entries[0].isIntersecting && !started) {
+
+                    started = true;
+
+                    requestAnimationFrame(run);
+
+                }
+
+            }, { threshold: 0.2 });
+
+
+            obs.observe(document.querySelector('.s2'));
+
+        })();
+
+
+        /* ── Section 9 expandable ── */
+
+        (function () {
+
+            var trigger = document.querySelector('.s9-expand-trigger');
+
+            var panel = document.querySelector('.s9-panel');
+
+            if (!trigger || !panel) return;
+
+
+            trigger.addEventListener('click', function () {
+
+                var isOpen = trigger.classList.contains('is-open');
+
+                if (isOpen) {
+
+                    trigger.classList.remove('is-open');
+
+                    trigger.setAttribute('aria-expanded', 'false');
+
+                    panel.classList.remove('is-open');
+
+                } else {
+
+                    trigger.classList.add('is-open');
+
+                    trigger.setAttribute('aria-expanded', 'true');
+
+                    panel.classList.add('is-open');
+
+                }
+
+            });
+
+        })();
+
+    </script>
+
+
+</body>
+
+</html>

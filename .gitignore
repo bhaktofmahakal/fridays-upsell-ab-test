@@ -6,8 +6,12 @@ FRIDAYS Working File/
 *.gif
 *.webp
 
-# Ignore IDE files
+# Ignore IDE and tool files
 .vscode/
 .idea/
 .DS_Store
 Thumbs.db
+.serena/
+
+# Local comparison screenshots
+comparison/
